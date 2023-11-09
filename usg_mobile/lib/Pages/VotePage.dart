@@ -21,6 +21,11 @@ class votePage extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(0.0, 20.0, 90.0, 0.0),
         ),
       ),
+
+      //your stuff
+
+
+
     );
   }
 }
