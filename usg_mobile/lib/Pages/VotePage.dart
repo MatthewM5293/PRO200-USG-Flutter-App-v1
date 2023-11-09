@@ -8,11 +8,11 @@ class votePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-            'USG',
-            style: TextStyle(
+          'USG',
+          style: TextStyle(
               color: Colors.yellow.shade600,
               fontWeight: FontWeight.bold
-            ),
+          ),
         ),
         backgroundColor: Colors.black26,
         centerTitle: true,
@@ -25,45 +25,27 @@ class votePage extends StatelessWidget {
       //your stuff
 
       body: Center(
-
         child: Column(
-
           children: [
-
             const Padding(padding: EdgeInsets.all(2.0)),
-
             const TextField( //is the text box?
-
               maxLines: 12,
-
             ),
-
             Row(
-
               children: [
-
                 TextButton(
-
-                  onPressed: (){
+                  onPressed: () {
                     //Code for Yes goes here
                   },
-
                   child: const Text('Yes'),
-
                 ),
-
                 TextButton(
-
-                  onPressed: (){
+                  onPressed: () {
                     //Code for no here
                   },
-
                   child: const Text('No'),
-
                 ),
-
               ],
-
             ),
 
             /*TextButton( //Will go back to main
@@ -75,16 +57,8 @@ class votePage extends StatelessWidget {
             ),*/
 
           ],
-
         ),
-
       ),
-
-
     );
-
-    }
-
-    }
-
-//body: ,
+  } //build
+} //class
