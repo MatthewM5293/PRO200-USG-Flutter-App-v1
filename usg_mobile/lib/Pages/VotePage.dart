@@ -24,10 +24,67 @@ class votePage extends StatelessWidget {
 
       //your stuff
 
+      body: Center(
+
+        child: Column(
+
+          children: [
+
+            const Padding(padding: EdgeInsets.all(2.0)),
+
+            const TextField( //is the text box?
+
+              maxLines: 12,
+
+            ),
+
+            Row(
+
+              children: [
+
+                TextButton(
+
+                  onPressed: (){
+                    //Code for Yes goes here
+                  },
+
+                  child: const Text('Yes'),
+
+                ),
+
+                TextButton(
+
+                  onPressed: (){
+                    //Code for no here
+                  },
+
+                  child: const Text('No'),
+
+                ),
+
+              ],
+
+            ),
+
+            /*TextButton( //Will go back to main
+
+              onPressed: (){Navigator.pop(context);},
+
+              child: const Text('Goes Back To Home'),
+
+            ),*/
+
+          ],
+
+        ),
+
+      ),
 
 
     );
-  }
-}
+
+    }
+
+    }
 
 //body: ,
