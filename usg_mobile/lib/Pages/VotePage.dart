@@ -8,7 +8,7 @@ class votePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'USG',
+          '      USG',
           style: TextStyle(
               color: Colors.yellow.shade600,
               fontWeight: FontWeight.bold
@@ -18,7 +18,7 @@ class votePage extends StatelessWidget {
         centerTitle: true,
         flexibleSpace: Container(
           child: Image.asset('assets/images/Neumont_logo.png'),
-          padding: EdgeInsets.fromLTRB(0.0, 20.0, 90.0, 0.0),
+          padding: EdgeInsets.fromLTRB(0.0, 20.0, 60.0, 0.0),
         ),
       ),
 
@@ -47,14 +47,6 @@ class votePage extends StatelessWidget {
                 ),
               ],
             ),
-
-            /*TextButton( //Will go back to main
-
-              onPressed: (){Navigator.pop(context);},
-
-              child: const Text('Goes Back To Home'),
-
-            ),*/
 
           ],
         ),
