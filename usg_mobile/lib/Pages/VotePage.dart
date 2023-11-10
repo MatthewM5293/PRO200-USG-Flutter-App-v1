@@ -6,51 +6,72 @@ class votePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          '      USG',
-          style: TextStyle(
-              color: Colors.yellow.shade600,
-              fontWeight: FontWeight.bold
-          ),
-        ),
-        backgroundColor: Colors.black26,
-        centerTitle: true,
-        flexibleSpace: Container(
-          child: Image.asset('assets/images/Neumont_logo.png'),
-          padding: EdgeInsets.fromLTRB(0.0, 20.0, 60.0, 0.0),
-        ),
-      ),
 
-      //your stuff
+
+      appBar: appBar(),
 
       body: Center(
         child: Column(
           children: [
-            const Padding(padding: EdgeInsets.all(2.0)),
-            const TextField( //is the text box?
-              maxLines: 12,
+            Container(
+              alignment: Alignment.center,
+              color: Colors.grey,
+              width: 300,
+              height: 400,
+              margin: EdgeInsets.fromLTRB(20, 40, 20, 5),
+              child: Column(
+                children: [
+                  const TextField( maxLines: 1,),
+                ],
+              )
             ),
-            Row(
-              children: [
-                TextButton(
+            const Padding(padding: EdgeInsets.all(2.0)),
+
+
+
+                OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                  alignment: Alignment.centerRight,
+
+                    side: BorderSide(
+                      width: 2.0,
+                    ),
+                    backgroundColor: Colors.white10,
+                    foregroundColor: Colors.black,
+                      textStyle: const TextStyle(fontSize: 20)
+                  ),
                   onPressed: () {
                     //Code for Yes goes here
+                    debugPrint('Received click');
+
                   },
-                  child: const Text('Yes'),
+                  child: const Text('Submit Votes'),
                 ),
-                TextButton(
-                  onPressed: () {
-                    //Code for no here
-                  },
-                  child: const Text('No'),
-                ),
-              ],
-            ),
 
           ],
         ),
       ),
+
     );
   } //build
+
+  AppBar appBar() {
+    return AppBar(
+      title: Text(
+        '      USG',
+        style: TextStyle(
+            color: Colors.yellow.shade600,
+            fontWeight: FontWeight.bold
+        ),
+      ),
+      backgroundColor: Colors.black26,
+      centerTitle: true,
+      flexibleSpace: Container(
+        child: Image.asset('assets/images/Neumont_logo.png'),
+        padding: EdgeInsets.fromLTRB(0.0, 20.0, 60.0, 0.0),
+      ),
+    );
+  }
+
+
 } //class
