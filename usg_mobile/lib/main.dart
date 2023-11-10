@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:usg_mobile/pages/votePage.dart';
+import 'package:usg_mobile/pages/InitiativePage.dart';
 
 
 void main() { runApp(const MyApp()); }
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       title: 'usg moblie',
       debugShowCheckedModeBanner: true, //set to false when debug is over :)
-      home: votePage()
+      home: InitiativePage()
     );
   }
 }

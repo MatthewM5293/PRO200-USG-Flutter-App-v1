@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-class votePage extends StatelessWidget {
-  const votePage({super.key});
+class InitiativePage extends StatelessWidget {
+  const InitiativePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-            'USG',
-            style: TextStyle(
+          'USG',
+          style: TextStyle(
               color: Colors.yellow.shade600,
               fontWeight: FontWeight.bold
-            ),
+          ),
         ),
         backgroundColor: Colors.black26,
         centerTitle: true,
@@ -20,6 +20,7 @@ class votePage extends StatelessWidget {
           child: Image.asset('assets/images/Neumont_logo.png'),
           padding: EdgeInsets.fromLTRB(0.0, 20.0, 90.0, 0.0),
         ),
+
       ),
 
       //your stuff
@@ -32,9 +33,9 @@ class votePage extends StatelessWidget {
 
             const Padding(padding: EdgeInsets.all(2.0)),
 
-            const TextField( //is the text box?
+            const Text(''), //initiative title
 
-              maxLines: 12,
+            const TextField( //description box
 
             ),
 
@@ -48,7 +49,7 @@ class votePage extends StatelessWidget {
                     //Code for Yes goes here
                   },
 
-                  child: const Text('Yes'),
+                  child: const Text('Sign Initiative'),
 
                 ),
 
@@ -58,7 +59,7 @@ class votePage extends StatelessWidget {
                     //Code for no here
                   },
 
-                  child: const Text('No'),
+                  child: const Text('Undo Signature'),
 
                 ),
 
@@ -66,13 +67,13 @@ class votePage extends StatelessWidget {
 
             ),
 
-            /*TextButton( //Will go back to main
+            TextButton( //Will go back to main
 
               onPressed: (){Navigator.pop(context);},
 
-              child: const Text('Goes Back To Home'),
+              child: const Text('Go Back'),
 
-            ),*/
+            ),
 
           ],
 
@@ -82,8 +83,8 @@ class votePage extends StatelessWidget {
 
     );
 
-    }
+  }
 
-    }
+}
 
 //body: ,
