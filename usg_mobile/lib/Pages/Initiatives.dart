@@ -49,15 +49,23 @@ class Initiatives{
 
   static void createInit(String title, String description, String creator){
 
-    bool goodToAdd = true;
+    bool goodToAdd = false;
 
     Initiative init = Initiative.fromInitiative(title, description, creator);
 
-    for(int i = 0; i < initiatives.length; i++){
+    if(initiatives.isEmpty == true){
 
-      if(initiatives[i].title.toLowerCase() != title.toLowerCase()){
+      initiatives.add(init);
 
-        goodToAdd = false;
+    }else{
+
+      for(int i = 0; i < initiatives.length; i++){
+
+        if(initiatives[i].title.toLowerCase() != title.toLowerCase()){
+
+          goodToAdd = true;
+
+        }
 
       }
 

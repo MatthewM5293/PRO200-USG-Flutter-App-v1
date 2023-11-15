@@ -88,7 +88,10 @@ class _CreateInitPage extends State<CreateInitPage>{
 
                     Initiatives.createInit(title, desc, 'temp data User');
 
-                    Initiatives.printInits();
+                    titleController.text = '';
+
+                    descController.text = '';
+
                   },
 
                   child: const Text('Create Initiative'),

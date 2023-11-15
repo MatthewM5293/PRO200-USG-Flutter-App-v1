@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:usg_mobile/Pages/TestingMainPage.dart';
-//import 'package:usg_mobile/Pages/Initiatives.dart';
 
 void main() { runApp(const MyApp()); }
 

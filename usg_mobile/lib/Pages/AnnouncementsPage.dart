@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:usg_mobile/Pages/Initiatives.dart';
 
 List<Widget> announcementList = <Widget>[];
 
@@ -29,9 +30,56 @@ class AnnouncementsHome extends StatefulWidget {
 
 class _AnnouncementsHomeState extends State<AnnouncementsHome>
 {
+
   @override
   Widget build(BuildContext context)
   {
+
+    announcementList.clear();
+
+    for(int i = 0; i < Initiatives.initiatives.length; i++){
+
+      announcementList.add(
+          Container(
+              height: 150,
+              width: MediaQuery.of(context).size.width,
+              color: Colors.amber,
+              margin: const EdgeInsets.all(16.0),
+              child: Stack(
+                children: [
+                  Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                          Initiatives.initiatives[i].title
+                      )
+                  ),
+                  Align(
+                      alignment: Alignment.topRight,
+                      child: Text(
+                          Initiatives.initiatives[i].createDate.toString()
+                      )
+                  ),
+                  Align(
+                      alignment: Alignment(-1.0, -0.75),
+                      child: Text(
+                          Initiatives.initiatives[i].creator
+                      )
+                  ),
+                  Align(
+                      alignment: Alignment(-1.0, -0.50),
+                      child: Text(
+                          Initiatives.initiatives[i].description
+                      )
+                  )
+                ],
+              )
+          )
+
+      );
+
+
+    }
+
     return Scaffold(
         appBar: AppBar(
           title: const Text(
