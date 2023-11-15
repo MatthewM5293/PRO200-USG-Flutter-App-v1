@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:usg_mobile/pages/CreateInitPage.dart';
+import 'package:usg_mobile/Pages/TestingMainPage.dart';
 //import 'package:usg_mobile/Pages/Initiatives.dart';
 
 void main() { runApp(const MyApp()); }
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       title: 'usg moblie',
       debugShowCheckedModeBanner: false, //set to false when debug is over :)
-      home: const CreateInitPage()
+      home: const AllPage()
     );
   }
 }
