@@ -50,7 +50,8 @@ class votePage extends StatefulWidget {
     );
   }
 
-  // body
+  //body
+  //next page button is in here
   Center body() {
     return Center(
       child: Column(
@@ -74,7 +75,7 @@ class votePage extends StatefulWidget {
                 textStyle: const TextStyle(fontSize: 20)),
             onPressed: () {
               //Code for Yes goes here
-              debugPrint('Received click');
+              debugPrint('Next');
             },
             child: const Text('Submit Votes'),
           ),
