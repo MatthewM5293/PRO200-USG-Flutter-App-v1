@@ -18,7 +18,7 @@ class votePage extends StatelessWidget {
         centerTitle: true,
         flexibleSpace: Container(
           child: Image.asset('assets/images/Neumont_logo.png'),
-          padding: EdgeInsets.fromLTRB(0.0, 20.0, 90.0, 0.0),
+          padding: const EdgeInsets.fromLTRB(0.0, 20.0, 90.0, 0.0),
         ),
       ),
 

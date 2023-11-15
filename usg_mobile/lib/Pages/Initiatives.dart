@@ -1,6 +1,4 @@
 
-import 'dart:js_util';
-
 class Initiative{
 
   String title = '';
@@ -15,7 +13,7 @@ class Initiative{
 
   Initiative();
 
-  Initiative.fromInitiative(this.title, this.description, this.creator){}
+  Initiative.fromInitiative(this.title, this.description, this.creator);
 
   void addSigs(String sig){
 
@@ -49,7 +47,7 @@ class Initiatives{
 
   static List initiatives = <Initiative>[];
 
-  void createInit(String title, String description, String creator){
+  static void createInit(String title, String description, String creator){
 
     bool goodToAdd = true;
 
@@ -57,7 +55,7 @@ class Initiatives{
 
     for(int i = 0; i < initiatives.length; i++){
 
-      if(!initiatives[i].title.toLowerCase() == title.toLowerCase()){
+      if(initiatives[i].title.toLowerCase() != title.toLowerCase()){
 
         goodToAdd = false;
 
@@ -73,7 +71,19 @@ class Initiatives{
 
   }
 
-  void removeInitByTitle(String title){
+  static void printInits(){
+
+      for(int i = 0; i < initiatives.length; i++){
+
+        print(initiatives[i].title);
+
+        print(initiatives[i].description);
+
+      }
+
+  }
+
+  static void removeInitByTitle(String title){
 
     for(int i = 0; i < initiatives.length; i++){
 
@@ -89,7 +99,7 @@ class Initiatives{
 
   }
 
-  void removeInitsByCreator(String creator){
+  static void removeInitsByCreator(String creator){
 
     List heretics = <int>[];
 
@@ -115,9 +125,9 @@ class Initiatives{
 
   }
 
-  Initiative getInitByTitle(String title){
+  static Initiative getInitByTitle(String title){
 
-    Initiative init = newObject();
+    Initiative init = Initiative();
 
     for(int i = 0; i < initiatives.length; i++){
 
