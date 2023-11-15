@@ -11,19 +11,19 @@ class votePage extends StatefulWidget {
   } //build
 
   class _votePageState extends State<votePage> {
-    String user = "someone@gmail.com";
-    String creator = "chcolby@student.neumont.edu";
+    String user = "someone@gmail.com"; //set equal to the users email
+    String creator = "chcolby@student.neumont.edu"; //i'm not sure what this is used for tbh
     Map<String, int> usersWhoVoted = {
-      'sam@mail.com': 3,
-      'mike@mail.com': 4,
-      'john@mail.com': 1,
+      'sam@mail.com': 4,
+      'mike@mail.com': 3,
+      'john@mail.com': 4,
       'kenny@mail.com': 1
-    };
+    };    //this is got to be a database list of all the people. i think the numbers are to show what people voted.
 
     double option1 = 1.0;
     double option2 = 0.0;
     double option3 = 1.0;
-    double option4 = 1.0;
+    double option4 = 2.0; //how many have voted that option before
 
     @override
     Widget build(BuildContext context) {
@@ -33,6 +33,7 @@ class votePage extends StatefulWidget {
       );
 }
 
+  //app bar
   AppBar appBar() {
     return AppBar(
       title: Text(
@@ -49,6 +50,7 @@ class votePage extends StatefulWidget {
     );
   }
 
+  // body
   Center body() {
     return Center(
       child: Column(
@@ -59,7 +61,7 @@ class votePage extends StatefulWidget {
               height: 400,
               margin: EdgeInsets.fromLTRB(20, 40, 20, 5),
               child:
-                  Padding(padding: const EdgeInsets.all(32.0), child: poll())),
+                  Padding(padding: const EdgeInsets.all(32.0), child: poll())), //poll is all the poll stuff
           const Padding(padding: EdgeInsets.all(2.0)),
           OutlinedButton(
             style: OutlinedButton.styleFrom(
@@ -81,6 +83,7 @@ class votePage extends StatefulWidget {
     );
   }
 
+  //all the poll stuff
   Polls poll() {
     return Polls(
       children: [
@@ -88,7 +91,7 @@ class votePage extends StatefulWidget {
         Polls.options(title: 'Borgor', value: option2),
         Polls.options(title: 'Chezz', value: option3),
         Polls.options(title: 'Pickle', value: option4),
-      ],
+      ], //all the option names and the value they are matched with
       optionBarRadius: 24,
       borderWidth: 1,
       optionHeight: 50,
@@ -101,12 +104,14 @@ class votePage extends StatefulWidget {
       creatorID: creator,
       voteData: usersWhoVoted,
       userChoice: usersWhoVoted[user],
-      onVoteBorderColor: Colors.deepPurple,
-      voteCastedBorderColor: Colors.orange,
+
+      //colors
+      onVoteBorderColor: Colors.black,
+      voteCastedBorderColor: Colors.black,
       onVoteBackgroundColor: Colors.blue,
       leadingBackgroundColor: Colors.lightGreen,
-      backgroundColor: Colors.grey,
-      voteCastedBackgroundColor: Colors.grey,
+      backgroundColor: Colors.white24,
+      voteCastedBackgroundColor: Colors.white24,
 
       onVote: (choice) {
         setState(() {
@@ -133,7 +138,6 @@ class votePage extends StatefulWidget {
           });
         }
         },
-
     );
   }
 
