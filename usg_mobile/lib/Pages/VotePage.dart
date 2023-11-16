@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:better_polls/better_polls.dart';
-
-
+import 'package:usg_mobile/Pages/votedPage.dart';
 
 class votePage extends StatefulWidget {
   const votePage({super.key});
@@ -74,6 +73,9 @@ class votePage extends StatefulWidget {
                 foregroundColor: Colors.black,
                 textStyle: const TextStyle(fontSize: 20)),
             onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context){
+                return const votedPage();
+              }));
               //Code for Yes goes here
               debugPrint('Next');
             },

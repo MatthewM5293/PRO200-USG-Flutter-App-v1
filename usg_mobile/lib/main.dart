@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'usg moblie',
-      debugShowCheckedModeBanner: false, //set to false when debug is over :)
+      debugShowCheckedModeBanner: true, //set to false when debug is over :)
       home: const AllPage()
     );
   }
