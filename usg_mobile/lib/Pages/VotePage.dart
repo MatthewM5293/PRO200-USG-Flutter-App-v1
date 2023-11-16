@@ -34,21 +34,21 @@ class votePage extends StatefulWidget {
 }
 
   //app bar
-  AppBar appBar() {
-    return AppBar(
-      title: Text(
-        '      USG',
-        style: TextStyle(
-            color: Colors.yellow.shade600, fontWeight: FontWeight.bold),
-      ),
-      backgroundColor: Colors.black26,
-      centerTitle: true,
-      flexibleSpace: Container(
-        child: Image.asset('assets/images/Neumont_logo.png'),
-        padding: EdgeInsets.fromLTRB(0.0, 20.0, 60.0, 0.0),
-      ),
-    );
-  }
+    AppBar appBar() {
+      return AppBar(
+        title: Text(
+          '      USG',
+          style: TextStyle(
+              color: Colors.yellow.shade600, fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Colors.black26,
+        centerTitle: true,
+        flexibleSpace: Container(
+          padding: const EdgeInsets.fromLTRB(0.0, 20.0, 60.0, 0.0),
+          child: Image.asset('assets/images/Neumont_logo.png'),
+        ),
+      );
+    }
 
   //body
   //next page button is in here
@@ -60,14 +60,14 @@ class votePage extends StatefulWidget {
               color: Colors.grey,
               width: 300,
               height: 400,
-              margin: EdgeInsets.fromLTRB(20, 40, 20, 5),
+              margin: const EdgeInsets.fromLTRB(20, 40, 20, 5),
               child:
                   Padding(padding: const EdgeInsets.all(32.0), child: poll())), //poll is all the poll stuff
           const Padding(padding: EdgeInsets.all(2.0)),
           OutlinedButton(
             style: OutlinedButton.styleFrom(
                 alignment: Alignment.centerRight,
-                side: BorderSide(
+                side: const BorderSide(
                   width: 2.0,
                 ),
                 backgroundColor: Colors.white10,
@@ -77,7 +77,7 @@ class votePage extends StatefulWidget {
               //Code for Yes goes here
               debugPrint('Next');
             },
-            child: const Text('Submit Votes'),
+            child: const Text('Next'),
           ),
         ],
       ),
@@ -114,6 +114,7 @@ class votePage extends StatefulWidget {
       backgroundColor: Colors.white24,
       voteCastedBackgroundColor: Colors.white24,
 
+      //this is the on clicks for the vote buttons
       onVote: (choice) {
         setState(() {
           usersWhoVoted[user] = choice;
