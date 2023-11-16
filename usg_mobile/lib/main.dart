@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:usg_mobile/pages/votePage.dart';
-import 'package:usg_mobile/pages/votedPage.dart';
 
+import 'package:flutter/material.dart';
+import 'package:usg_mobile/Pages/TestingMainPage.dart';
 
 void main() { runApp(const MyApp()); }
 
@@ -13,8 +12,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'usg moblie',
-      debugShowCheckedModeBanner: true, //set to false when debug is over :)
-      home: votedPage()
+      debugShowCheckedModeBanner: false, //set to false when debug is over :)
+      home: const AllPage()
     );
   }
 }
