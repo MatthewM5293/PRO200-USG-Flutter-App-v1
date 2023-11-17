@@ -56,7 +56,7 @@ class _AnnouncementsHomeState extends State<AnnouncementsHome>
                   Align(
                       alignment: Alignment.topRight,
                       child: Text(
-                          Initiatives.initiatives[i].createDate.toString()
+                          Initiatives.initiatives[i].createDate.month.toString() + "-" + Initiatives.initiatives[i].createDate.day.toString() + "-" + Initiatives.initiatives[i].createDate.year.toString()
                       )
                   ),
                   Align(
@@ -76,7 +76,6 @@ class _AnnouncementsHomeState extends State<AnnouncementsHome>
           )
 
       );
-
 
     }
 

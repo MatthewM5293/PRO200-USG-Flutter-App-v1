@@ -11,8 +11,13 @@ class votePage extends StatefulWidget {
   } //build
 
   class _votePageState extends State<votePage> {
-    String user = "someone@gmail.com"; //set equal to the users email
+
+    String user = "someone@gmail.com"; //need to input logged in user's name
+
     String creator = "chcolby@student.neumont.edu"; //i'm not sure what this is used for tbh
+
+    int usersVote = 0; //should be what spot of options[] user votes for
+
     Map<String, int> usersWhoVoted = {
       'sam@mail.com': 4,
       'mike@mail.com': 3,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:usg_mobile/Pages/CreateVoterPage.dart';
 import 'package:usg_mobile/Pages/VotePage.dart';
 import 'package:usg_mobile/Pages/InitiativePage.dart';
 import 'package:usg_mobile/Pages/CreateInitPage.dart';
@@ -7,8 +8,11 @@ import 'package:usg_mobile/Pages/AnnouncementsPage.dart';
 class AllPage extends StatelessWidget {
   const AllPage({super.key});
 
+  static int initOpen = 0;
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
 
       appBar: AppBar(
@@ -101,6 +105,22 @@ class AllPage extends StatelessWidget {
                   },
 
                   child: const Text('Go to Announcements Page'),
+
+                ),
+
+                TextButton(
+
+                  onPressed: (){
+
+                    Navigator.push(context, MaterialPageRoute(builder: (context){
+
+                      return const CreateVoterPage();
+
+                    }));
+
+                  },
+
+                  child: const Text('Go to Make Voter Page'),
 
                 ),
 

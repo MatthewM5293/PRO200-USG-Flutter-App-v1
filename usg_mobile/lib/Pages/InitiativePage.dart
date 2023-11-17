@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:usg_mobile/Pages/Initiatives.dart';
+import 'package:usg_mobile/Pages/TestingMainPage.dart';
 
-class InitiativePage extends StatelessWidget {
+class InitiativePage extends StatefulWidget {
   const InitiativePage({super.key});
+
+  @override
+  State<StatefulWidget> createState() => _InitPage();
+
+}
+
+  class _InitPage extends State<InitiativePage>{
+
+    late String title = Initiatives.initiatives[AllPage.initOpen].title;
+
+    late String desc = Initiatives.initiatives[AllPage.initOpen].description;
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +46,9 @@ class InitiativePage extends StatelessWidget {
 
             const Padding(padding: EdgeInsets.all(2.0)),
 
-            const Text(''), //initiative title
+            Text(title), //initiative title
 
-            const Text(''), //description box
+            Text(desc), //description box
 
             Row(
 
@@ -44,7 +57,11 @@ class InitiativePage extends StatelessWidget {
                 TextButton(
 
                   onPressed: (){
-                    //Code for Yes goes here
+
+                    Initiatives.initiatives[AllPage.initOpen].addSigs("doge");
+
+                    Initiatives.initiatives[AllPage.initOpen].printSigs();
+
                   },
 
                   child: const Text('Sign Initiative'),
@@ -54,7 +71,11 @@ class InitiativePage extends StatelessWidget {
                 TextButton(
 
                   onPressed: (){
-                    //Code for no here
+
+                    Initiatives.initiatives[AllPage.initOpen].removeSig("doge");
+
+                    Initiatives.initiatives[AllPage.initOpen].printSigs();
+
                   },
 
                   child: const Text('Undo Signature'),
