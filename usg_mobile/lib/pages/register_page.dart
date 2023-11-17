@@ -12,9 +12,9 @@ class RegisterWidget extends StatefulWidget {
 }
 
 class _RegisterWidgetState extends State<RegisterWidget> {
-  TextEditingController _passwordTextController = TextEditingController();
-  TextEditingController _emailTextController = TextEditingController();
-  TextEditingController _userNameTextController = TextEditingController();
+  final TextEditingController _passwordTextController = TextEditingController();
+  final TextEditingController _emailTextController = TextEditingController();
+  final TextEditingController _userNameTextController = TextEditingController();
 
   //controllers here
   @override
@@ -55,7 +55,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => MyHomePage()));
+                              builder: (context) => const MyHomePage()));
                     }).onError((error, stackTrace) {
                       if (kDebugMode) {
                         print("Error ${error.toString()}");

@@ -12,8 +12,8 @@ class LoginWidget extends StatefulWidget {
 }
 
 class _LoginWidgetState extends State<LoginWidget> {
-  TextEditingController _passwordTextController = TextEditingController();
-  TextEditingController _emailTextController = TextEditingController();
+  final TextEditingController _passwordTextController = TextEditingController();
+  final TextEditingController _emailTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => MyHomePage()));
+                              builder: (context) => const MyHomePage()));
                     });
                   }),
                 ),
@@ -66,7 +66,7 @@ class _LoginWidgetState extends State<LoginWidget> {
         GestureDetector(
           onTap: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => RegisterWidget()));
+                MaterialPageRoute(builder: (context) => const RegisterWidget()));
           },
           child: const Text("Sign up"),
         )

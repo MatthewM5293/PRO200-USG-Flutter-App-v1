@@ -38,9 +38,6 @@ Container signInSignUpButton(
       onPressed: () {
         onClick();
       },
-      child: Text(
-        isLogin ? 'Log in' : 'Sign Up',
-      ),
       style: ButtonStyle(
           backgroundColor: MaterialStateProperty.resolveWith((states) {
             if (states.contains(MaterialState.pressed)) {
@@ -51,6 +48,9 @@ Container signInSignUpButton(
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0)))),
+      child: Text(
+        isLogin ? 'Log in' : 'Sign Up',
+      ),
     ),
   );
 }
