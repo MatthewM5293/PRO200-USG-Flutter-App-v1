@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:usg_mobile/pages/aboutusg.dart';
 
 void main() {
   runApp(const MyApp());
@@ -111,6 +112,16 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
+            ),TextButton(
+
+              onPressed: (){
+
+                Navigator.push(context, MaterialPageRoute(builder: (context){
+
+                  return const AboutUsg();}));},
+
+              child: const Text('AboutUsg'),
+
             ),
           ],
         ),
@@ -119,7 +130,8 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
+      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
