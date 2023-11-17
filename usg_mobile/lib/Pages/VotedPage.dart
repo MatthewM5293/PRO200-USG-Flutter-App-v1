@@ -41,10 +41,14 @@ class _votedPageState extends State<votedPage> {
       child: Column(
         children: [
           Container(
-              color: Colors.green,
               width: 300,
-              height: 300,
+              height: 330,
+              decoration: BoxDecoration(
+                  color: Colors.green,
+                  borderRadius: BorderRadius.circular(30)
+              ),
               margin: EdgeInsets.fromLTRB(20, 40, 20, 5),
+              padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
               child: Column(children: [
                 const Text(
                   'Thank You For Voteing',

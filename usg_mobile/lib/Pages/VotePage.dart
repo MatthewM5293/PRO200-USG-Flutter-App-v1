@@ -10,7 +10,7 @@ class votePage extends StatefulWidget {
   } //build
 
   class _votePageState extends State<votePage> {
-    String user = "someone@gmail.com"; //set equal to the users email
+    String user = "someone@mail.com"; //set equal to the users email
     String creator = "chcolby@student.neumont.edu"; //i'm not sure what this is used for tbh
     Map<String, int> usersWhoVoted = {
       'sam@mail.com': 4,
@@ -56,9 +56,12 @@ class votePage extends StatefulWidget {
       child: Column(
         children: [
           Container(
-              color: Colors.grey,
               width: 300,
               height: 400,
+              decoration: BoxDecoration(
+                  color: Colors.grey,
+                  borderRadius: BorderRadius.circular(30)
+              ),
               margin: const EdgeInsets.fromLTRB(20, 40, 20, 5),
               child:
                   Padding(padding: const EdgeInsets.all(32.0), child: poll())), //poll is all the poll stuff
