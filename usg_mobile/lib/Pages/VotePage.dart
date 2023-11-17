@@ -13,16 +13,17 @@ class votePage extends StatefulWidget {
     String user = "someone@mail.com"; //set equal to the users email
     String creator = "chcolby@student.neumont.edu"; //i'm not sure what this is used for tbh
     Map<String, int> usersWhoVoted = {
-      'sam@mail.com': 4,
-      'mike@mail.com': 3,
-      'john@mail.com': 4,
-      'kenny@mail.com': 1
+      'sam@mail.com': 3,
+      'mike@mail.com': 2,
+      'john@mail.com': 3,
+      'kenny@mail.com': 0,
+      'someone2@mail.com': 3, //make this match the user to dissable votes for the debug test
     };    //this is got to be a database list of all the people. i think the numbers are to show what people voted.
 
     double option1 = 1.0;
     double option2 = 0.0;
     double option3 = 1.0;
-    double option4 = 2.0; //how many have voted that option before
+    double option4 = 3.0; //how many have voted that option before
 
     @override
     Widget build(BuildContext context) {
@@ -59,8 +60,9 @@ class votePage extends StatefulWidget {
               width: 300,
               height: 400,
               decoration: BoxDecoration(
-                  color: Colors.grey,
-                  borderRadius: BorderRadius.circular(30)
+                border: Border.all(),
+                color: Colors.grey,
+                borderRadius: BorderRadius.circular(30),
               ),
               margin: const EdgeInsets.fromLTRB(20, 40, 20, 5),
               child:
@@ -103,7 +105,7 @@ class votePage extends StatefulWidget {
       optionHeight: 50,
       optionSpacing: 12,
       question: const Padding(
-        padding: EdgeInsets.only(bottom: 16.0),
+        padding: EdgeInsets.fromLTRB(60,0,0,10),
         child: Text('What food u want?'),
       ),
       currentUser: user,
