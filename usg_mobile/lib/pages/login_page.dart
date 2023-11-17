@@ -45,7 +45,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const MyHomePage()));
+                              builder: (context) => const MyHomePage(title: 'Flutter Demo Home Page')));
                     });
                   }),
                 ),
