@@ -5,9 +5,9 @@ FirebaseFirestore db = FirebaseFirestore.instance;
 
 class Initiative {
   User? initiative_owner = FirebaseAuth.instance.currentUser;
-  final String? title;
-  final String? description;
-  final List<String>? signatures;
+  String? title;
+  String? description;
+  List<String>? signatures;
 
   Initiative({
     this.initiative_owner,
@@ -37,6 +37,5 @@ class Initiative {
       "signatures": signatures,
     };
   }
-
 
 }

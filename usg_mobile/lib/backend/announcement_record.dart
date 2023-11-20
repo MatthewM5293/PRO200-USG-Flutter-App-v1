@@ -3,8 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class Announcement {
   final User? annoucement_owner;
-  final String? title;
-  final String? description;
+  String? title;
+  String? description;
 
   Announcement({
     this.annoucement_owner,
