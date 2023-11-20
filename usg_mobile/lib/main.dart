@@ -1,9 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'package:flutter/material.dart';
+
 //pages
 import 'package:usg_mobile/pages/register_page.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -34,6 +41,10 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      debugShowCheckedModeBanner: false, //disables debug tag
+      routes: <String, WidgetBuilder>{
+        '/register' : (BuildContext context) => const RegisterWidget()
+      },
     );
   }
 }
@@ -123,5 +134,11 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  signOut() {
+    FirebaseAuth.instance.signOut();
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (context) => const RegisterWidget()));
   }
 }
