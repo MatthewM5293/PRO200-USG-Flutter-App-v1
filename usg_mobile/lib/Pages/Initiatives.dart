@@ -57,68 +57,6 @@ class Initiative{
 
 }
 
-class VoteData{
-
-  static List alrVotedUsers = <VoterData>[];
-
-  static List userOptions = <String>[];
-
-  static List optionPercents = <double>[];
-
-  static void addOption(String option){ //each time we create one its percent gets made with it
-
-    userOptions.add(option);
-
-    optionPercents.add(0); //all start out at zero, we will add to this value in the actual voting portion
-
-  }
-
-  static void addVotee(String activeVoter, int userPick){//activeVoter = person who has put in input
-
-    bool alrIn = true;
-
-    for(int i = 0; i < alrVotedUsers.length; i++){
-
-      if(alrVotedUsers[i].data.contains(activeVoter) != true){
-
-        alrIn = false;
-
-        break;
-
-      }
-
-    }
-
-    if(alrIn != true || alrVotedUsers.isEmpty == true){
-
-      Map inputFormat = {
-
-        String: activeVoter,
-
-        int: userPick
-
-      };
-
-      alrVotedUsers.add(inputFormat);
-
-    }
-
-  }
-
-}
-
-class VoterData {
-
-  Map data = {
-
-  String: "",
-
-  int: 0
-
-  };
-
-}
-
 class Initiatives{
 
   static List initiatives = <Initiative>[];

@@ -41,6 +41,7 @@ class _AnnouncementsHomeState extends State<AnnouncementsHome>
 
       announcementList.add(
           Container(
+
               height: 150,
               width: MediaQuery.of(context).size.width,
               color: Colors.amber,
