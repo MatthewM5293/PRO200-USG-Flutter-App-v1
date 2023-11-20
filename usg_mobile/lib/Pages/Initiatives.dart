@@ -45,6 +45,8 @@ class Initiative{
 
 class Initiatives{
 
+  static int initToLoad = 0;
+
   static List initiatives = <Initiative>[];
 
   static void createInit(String title, String description, String creator){

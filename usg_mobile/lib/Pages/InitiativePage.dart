@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:usg_mobile/Pages/Initiatives.dart';
 
 class InitiativePage extends StatelessWidget {
-  const InitiativePage({super.key});
+
+  String title = Initiatives.initiatives[Initiatives.initToLoad].title;
+
+  String desc = Initiatives.initiatives[Initiatives.initToLoad].description;
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +37,9 @@ class InitiativePage extends StatelessWidget {
 
             const Padding(padding: EdgeInsets.all(2.0)),
 
-            const Text(''), //initiative title
+            Text(title.toString()), //initiative title
 
-            const Text(''), //description box
+            Text(desc.toString()), //description box
 
             Row(
 
