@@ -48,7 +48,7 @@ class InitiativePage extends StatelessWidget {
                 TextButton(
 
                   onPressed: (){
-                    //Code for Yes goes here
+                    Initiatives.initiatives[Initiatives.initToLoad].addSigs("adds current user's username");
                   },
 
                   child: const Text('Sign Initiative'),
@@ -58,7 +58,9 @@ class InitiativePage extends StatelessWidget {
                 TextButton(
 
                   onPressed: (){
-                    //Code for no here
+
+                    Initiatives.initiatives[Initiatives.initToLoad].removeSig("removes current user's username");
+
                   },
 
                   child: const Text('Undo Signature'),
