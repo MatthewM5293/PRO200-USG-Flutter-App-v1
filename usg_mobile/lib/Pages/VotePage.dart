@@ -102,11 +102,9 @@ class _votePageState extends State<votePage> {
                 foregroundColor: Colors.black,
                 textStyle: const TextStyle(fontSize: 20)),
             onPressed: () {
-              debugPrint(option1.toString() + ' ' + option2.toString() + ' ' +  option3.toString() + ' ' + option4.toString());
-
-              // Navigator.push(context, MaterialPageRoute(builder: (context){
-              //   return const votedPage();
-              // }));
+               Navigator.push(context, MaterialPageRoute(builder: (context){
+                 return const votedPage();
+               }));
               //Code for Yes goes here
               debugPrint('Next');
             },
