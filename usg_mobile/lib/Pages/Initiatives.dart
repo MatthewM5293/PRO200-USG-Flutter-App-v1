@@ -13,7 +13,11 @@ class Initiative{
 
   Initiative();
 
-  Initiative.fromInitiative(this.title, this.description, this.creator);
+  Initiative.fromInitiative(this.title, this.description, this.creator){
+
+    createDate = DateTime(createDate.year, createDate.month, createDate.day);
+
+  }
 
   void addSigs(String sig){
 
@@ -36,6 +40,16 @@ class Initiative{
           break;
 
         }
+
+    }
+
+  }
+
+  void printSigs(){
+
+    for(int i = 0; i < signers.length; i++){
+
+      print(signers[i].toString());
 
     }
 

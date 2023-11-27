@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:usg_mobile/Pages/Initiatives.dart';
+import 'package:usg_mobile/Pages/TestingMainPage.dart';
+import 'package:usg_mobile/Pages/Initiatives.dart';
 
-class InitiativePage extends StatelessWidget {
+class InitiativePage extends StatefulWidget {
+  const InitiativePage({super.key});
 
-  String title = Initiatives.initiatives[Initiatives.initToLoad].title;
+  @override
+  State<StatefulWidget> createState() => _InitPage();
 
-  String desc = Initiatives.initiatives[Initiatives.initToLoad].description;
+}
+
+  class _InitPage extends State<InitiativePage>{
+
+    late String title = Initiatives.initiatives[AllPage.initOpen].title;
+
+    late String desc = Initiatives.initiatives[AllPage.initOpen].description;
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +47,9 @@ class InitiativePage extends StatelessWidget {
 
             const Padding(padding: EdgeInsets.all(2.0)),
 
-            Text(title.toString()), //initiative title
+            Text(title), //initiative title
 
-            Text(desc.toString()), //description box
+            Text(desc), //description box
 
             Row(
 
@@ -48,7 +58,11 @@ class InitiativePage extends StatelessWidget {
                 TextButton(
 
                   onPressed: (){
-                    Initiatives.initiatives[Initiatives.initToLoad].addSigs("adds current user's username");
+
+                    Initiatives.initiatives[AllPage.initOpen].addSigs("doge");
+
+                    Initiatives.initiatives[AllPage.initOpen].printSigs();
+
                   },
 
                   child: const Text('Sign Initiative'),
@@ -59,7 +73,9 @@ class InitiativePage extends StatelessWidget {
 
                   onPressed: (){
 
-                    Initiatives.initiatives[Initiatives.initToLoad].removeSig("removes current user's username");
+                    Initiatives.initiatives[AllPage.initOpen].removeSig("doge");
+
+                    Initiatives.initiatives[AllPage.initOpen].printSigs();
 
                   },
 

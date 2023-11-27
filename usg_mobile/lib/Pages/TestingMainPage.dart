@@ -7,8 +7,11 @@ import 'package:usg_mobile/Pages/AnnouncementsPage.dart';
 class AllPage extends StatelessWidget {
   const AllPage({super.key});
 
+  static int initOpen = 0;
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
 
       appBar: AppBar(
