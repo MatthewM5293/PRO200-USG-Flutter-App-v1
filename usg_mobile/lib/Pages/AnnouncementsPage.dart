@@ -37,6 +37,7 @@ class _AnnouncementsHomeState extends State<AnnouncementsHome>
   @override
   Widget build(BuildContext context)
   {
+
     announcementList.clear();
 
     //iterates through the announcement lists
@@ -52,6 +53,7 @@ class _AnnouncementsHomeState extends State<AnnouncementsHome>
       //adds announcement to list
       announcementList.add(
           InkWell(
+
             child: Container(
                 height: 150,
                 width: MediaQuery.of(context).size.width,
@@ -111,6 +113,7 @@ class _AnnouncementsHomeState extends State<AnnouncementsHome>
 
                   ],
                 )
+
             ),
 
             onTap: () {
@@ -120,9 +123,11 @@ class _AnnouncementsHomeState extends State<AnnouncementsHome>
               var test3 = test.elementAt(0);
               //getting values from initiative
 
+              Initiatives.initToLoad = i;
+
               Navigator.push(context, MaterialPageRoute(builder: (context){
 
-                return const InitiativePage();
+                return InitiativePage();
 
               }));
             },
