@@ -46,6 +46,9 @@ class _AnnouncementsHomeState extends State<AnnouncementsHome>
       List colors = [Colors.amber, Colors.blue, Colors.deepPurple];
       Random random = new Random();
 
+      final height = MediaQuery.of(context).size.height;
+      final width = MediaQuery.of(context).size.width;
+
       //adds announcement to list
       announcementList.add(
           InkWell(
@@ -54,32 +57,58 @@ class _AnnouncementsHomeState extends State<AnnouncementsHome>
                 width: MediaQuery.of(context).size.width,
                 color: colors.elementAt(random.nextInt(colors.length)),
                 margin: const EdgeInsets.all(16.0),
-                child: Stack(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Align(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                            Initiatives.initiatives[i].title
-                        )
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          child: Text(
+                            Initiatives.initiatives[i].title,
+                            textAlign: TextAlign.left,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          margin: const EdgeInsets.fromLTRB(5, 3, 0, 0),
+                          color: Colors.redAccent,
+                          constraints: const BoxConstraints(
+                            maxWidth: 180
+                          ),
+                        ),
+
+                        Container(
+                          child: Text(
+                            Initiatives.initiatives[i].createDate.toString(),
+                            textAlign: TextAlign.right,
+                          ),
+                          margin: const EdgeInsets.fromLTRB(0, 3, 5, 0),
+                          color: Colors.green
+                        ),
+                      ],
                     ),
-                    Align(
-                        alignment: Alignment.topRight,
-                        child: Text(
-                            Initiatives.initiatives[i].createDate.toString()
-                        )
+
+
+                    Container(
+                      child: Text(
+                        Initiatives.initiatives[i].creator,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      margin: const EdgeInsets.fromLTRB(5, 3, 5, 0),
+                      color: Colors.cyanAccent,
                     ),
-                    Align(
-                        alignment: Alignment(-1.0, -0.75),
-                        child: Text(
-                            Initiatives.initiatives[i].creator
-                        )
+
+
+                    Container(
+                      height: 105,
+                      child: Text(
+                        Initiatives.initiatives[i].description,
+                        overflow: TextOverflow.fade,
+                      ),
+                      margin: const EdgeInsets.fromLTRB(5, 3, 5, 0),
+                      color: Colors.cyanAccent,
                     ),
-                    Align(
-                        alignment: Alignment(-1.0, -0.50),
-                        child: Text(
-                            Initiatives.initiatives[i].description
-                        )
-                    )
+
                   ],
                 )
             ),
