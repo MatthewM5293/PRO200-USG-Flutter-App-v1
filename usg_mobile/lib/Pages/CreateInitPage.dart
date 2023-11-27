@@ -86,7 +86,7 @@ class _CreateInitPage extends State<CreateInitPage>{
 
                     desc = descController.text;
 
-                    Initiatives.createInit(title, desc, 'temp data User');
+                    Initiatives.createInit(title, desc, 'temp data User');//Needs to grab current user username where says temp
 
                     titleController.text = '';
 
