@@ -45,13 +45,22 @@ class AboutUsg extends StatelessWidget {
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Padding(padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10)),
+                  Padding(padding: EdgeInsetsDirectional.fromSTEB(10, 100, 10, 10)),
                   Expanded(
                       child: Text(
                           '   USG, or Unified Student Government is what brings a voice to the student body, and '
                           'this app is meant to help streamline the connection between us and you.')
                   ),
                   Padding(padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10)),
+                ],
+              ),
+            ),Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(padding: EdgeInsetsDirectional.fromSTEB(0, 100, 0, 0)),
+                  Image.asset('assets/images/DiscordQRCode.png',height: 100,width: 100),
+                  Padding(padding:EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0))
                 ],
               ),
             )
