@@ -22,9 +22,10 @@ class _votePageState extends State<votePage> {
 
     double option1 = 0.0;
     double option2 = 0.0;
-    double option3 = 0.0;
+    double option3 = 0.0; //this gets set in the setValues so don't worry about changing the values.
     double option4 = 0.0; //how many have voted that option before
 
+    //reads the userWhoVoted and edits the values.
     void setValues(Map<String, int> usersWhoVoted) {
       option1 = 0.0;
       option2 = 0.0;
