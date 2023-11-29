@@ -26,9 +26,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      debugShowCheckedModeBanner: false,
-      //disables debug tag
+      home: const RegisterWidget(),
+      //home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      debugShowCheckedModeBanner: false, //disables debug tag
       routes: <String, WidgetBuilder>{
         '/register': (BuildContext context) => const RegisterWidget()
       },
