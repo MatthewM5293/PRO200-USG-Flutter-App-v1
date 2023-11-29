@@ -43,7 +43,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                             email: _emailTextController.text,
                             password: _passwordTextController.text)
                         .then((value) {
-                      print("user is signed in");
                       Navigator.push(
                           context,
                           MaterialPageRoute(
