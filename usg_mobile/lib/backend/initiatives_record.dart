@@ -3,39 +3,46 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 FirebaseFirestore db = FirebaseFirestore.instance;
 
-class Initiative {
-  User? initiative_owner = FirebaseAuth.instance.currentUser;
+class InitiativeRecord {
+  String? initiative_owner;
   String? title;
   String? description;
   List<String>? signatures;
+  DateTime? createDate;
 
-  Initiative({
-    this.initiative_owner,
-    this.title,
-    this.description,
-    this.signatures
-});
+  InitiativeRecord(
+      {this.initiative_owner, this.title, this.description, this.signatures, this.createDate});
 
-  factory Initiative.fromFirestore(
-      DocumentSnapshot<Map<String, dynamic>> snapshot,
-      SnapshotOptions? options,
-      ) {
+  factory InitiativeRecord.fromFirestore(
+    DocumentSnapshot<Map<String, dynamic>> snapshot,
+    SnapshotOptions? options,
+  ) {
     final data = snapshot.data();
-    return Initiative(
-      initiative_owner: data?['initiative_owner'],
-      title: data?['title'],
-      description: data?['description'],
-      signatures: data?['signatures']
-    );
+    return InitiativeRecord(
+        initiative_owner: data?['initiative_owner'],
+        title: data?['title'],
+        description: data?['description'],
+        createDate: data?['createDate'],
+        signatures: data?['signatures']);
   }
 
-  Map<String, dynamic> toFirestore() {
-    return {
-      if (initiative_owner != null) "initiative_owner": initiative_owner,
-      if (title != null) "title": title,
-      if (description != null) "description": description,
-      "signatures": signatures,
-    };
-  }
+  //get collection
+  static CollectionReference get collection =>
+      db.collection('Initiatives');
+}
 
+
+Map<String, dynamic> InitiativeRecordToFirestore({
+  String? initiative_owner,
+  String? title,
+  String? description,
+  List<String>? signatures
+}) {
+  return {
+    if (initiative_owner != null) "initiative_owner": initiative_owner,
+    if (title != null) "title": title,
+    if (description != null) "description": description,
+    "createDate" : DateTime.now(),
+    "signatures": signatures,
+  };
 }

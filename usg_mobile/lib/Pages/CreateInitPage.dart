@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:usg_mobile/Pages/Initiatives.dart';
+import 'package:usg_mobile/backend/initiatives_record.dart';
 import 'package:usg_mobile/pages/login_page.dart';
 import 'package:usg_mobile/reusable_widgets/reusable_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -68,11 +69,32 @@ class _CreateInitPage extends State<CreateInitPage> {
                   desc = descController.text;
                   FirebaseAuth.instance.authStateChanges().listen((User? user) {
                     if (user != null) {
-                      Initiatives.createInit(
-                        title,
-                        desc,
-                        user.email.toString(),
-                      );
+                      //await PostsRecord.collection
+                      //                                   .doc()
+                      //                                   .set(createPostsRecordData(
+                      //                                     postCaption: _model.textController.text,
+                      //                                     postDate: getCurrentTimestamp,
+                      //                                     postEditdate: null,
+                      //                                     postCommentsEnabled:
+                      //                                         _model.commentsEnabledValue,
+                      //                                     postOwner: currentUserReference,
+                      //                                     postOriginalCaption:
+                      //                                         _model.textController.text,
+                      //                                     postImage: _model.uploadedFileUrl3,
+                      //                                   ));
+
+                      InitiativeRecord.collection.doc().set(
+                          InitiativeRecordToFirestore(
+                              initiative_owner: user.email,
+                              title: title,
+                              description: desc,
+                              signatures: List.empty()));
+
+                      // Initiatives.createInit(
+                      //   title,
+                      //   desc,
+                      //   user.email.toString(),
+                      // );
                       Navigator.pop(context);
                     } else {
                       Navigator.push(

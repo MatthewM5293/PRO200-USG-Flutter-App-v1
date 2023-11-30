@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:usg_mobile/Pages/InitiativePage.dart';
-import 'package:usg_mobile/Pages/Initiatives.dart';
+import 'package:usg_mobile/backend/initiatives_record.dart';
 import 'package:usg_mobile/pages/CreateInitPage.dart';
 
 List<Widget> announcementList = <Widget>[];
@@ -34,10 +34,10 @@ class AnnouncementsHome extends StatefulWidget {
 class _AnnouncementsHomeState extends State<AnnouncementsHome> {
   @override
   Widget build(BuildContext context) {
-    announcementList.clear();
+    // announcementList.clear();
 
     //iterates through the announcement lists
-    for (int i = 0; i < Initiatives.initiatives.length; i++) {
+    for (int i = 0; i < InitiativeRecord.collection.doc().get(); i++) {
       //generates random color for the container
       List colors = [Colors.amber, Colors.blue, Colors.deepPurple];
       Random random = new Random();
@@ -67,12 +67,7 @@ class _AnnouncementsHomeState extends State<AnnouncementsHome> {
               ],
             )),
         onTap: () {
-          var test = Initiatives.initiatives;
-          print(test);
-          var test3 = test.elementAt(0);
-          //getting values from initiative
-
-          Initiatives.initToLoad = i;
+          InitiativeRecord.initToLoad = i;
 
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return InitiativePage();
@@ -83,14 +78,17 @@ class _AnnouncementsHomeState extends State<AnnouncementsHome> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Hello World!",
+        title: Text(
+          'USG',
           style: TextStyle(
-              color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+              color: Colors.yellow.shade600, fontWeight: FontWeight.bold),
         ),
-        elevation: 0.0,
-        backgroundColor: Colors.yellow,
+        backgroundColor: Colors.black,
         centerTitle: true,
+        flexibleSpace: Container(
+          padding: const EdgeInsets.fromLTRB(0.0, 30.0, 90.0, 0.0),
+          child: Image.asset('assets/images/Neumont_logo.png'),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(children: announcementList),

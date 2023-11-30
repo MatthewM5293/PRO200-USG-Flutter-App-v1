@@ -16,8 +16,8 @@ class RegisterWidget extends StatefulWidget {
 class _RegisterWidgetState extends State<RegisterWidget> {
   final TextEditingController _passwordTextController = TextEditingController();
   final TextEditingController _emailTextController = TextEditingController();
-  final TextEditingController _confirmPasswordTextController =
-      TextEditingController();
+  final TextEditingController _confirmPasswordTextController = TextEditingController();
+  final TextEditingController _nameTextController = TextEditingController();
 
   //controllers here
   @override
@@ -36,6 +36,11 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                  child: reusableInputField(
+                      "Name", Icons.person, _nameTextController),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                   child: reusableTextField("Password", Icons.lock_outline, true,
                       _passwordTextController),
                 ),
@@ -47,8 +52,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(130, 10, 0, 0),
                   child: signInSignUpButton(context, false, () {
-                    if (_passwordTextController.text ==
-                        _confirmPasswordTextController.text) {
+                    if (_passwordTextController.text == _confirmPasswordTextController.text) {
                       FirebaseAuth.instance
                           .createUserWithEmailAndPassword(
                               email: _emailTextController.text,
@@ -60,7 +64,8 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const AnnouncementsPage()));
+                                builder: (context) =>
+                                    const AnnouncementsPage()));
                       }).onError((error, stackTrace) {
                         if (kDebugMode) {
                           print("Error ${error.toString()}");
@@ -85,10 +90,8 @@ class _RegisterWidgetState extends State<RegisterWidget> {
         const Text("Already have an account? "),
         GestureDetector(
           onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const LoginWidget()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const LoginWidget()));
           },
           child: const Text("Login"),
         )
