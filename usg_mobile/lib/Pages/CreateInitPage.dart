@@ -81,7 +81,7 @@ class _CreateInitPage extends State<CreateInitPage> {
                       //                                         _model.textController.text,
                       //                                     postImage: _model.uploadedFileUrl3,
                       //                                   ));
-                      InitiativeRecord.collection.doc().set(
+                          InitiativeRecord.collection.doc().set(
                           initiative_owner: user.email,
                           title: title,
                           description: desc,

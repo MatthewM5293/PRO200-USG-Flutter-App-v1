@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'TestingMainPage.dart';
+import 'AboutUSG.dart';
 
 class votedPage extends StatefulWidget {
   const votedPage({super.key});
