@@ -19,7 +19,7 @@ class InitiativeRecord {
   ) {
     final data = snapshot.data();
     return InitiativeRecord(
-        initiative_owner: data?['initiative_owner'],
+        initiative_owner: data?['initiative_owner'],D
         title: data?['title'],
         description: data?['description'],
         createDate: data?['createDate'],
