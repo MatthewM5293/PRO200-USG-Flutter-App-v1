@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:usg_mobile/Pages/Initiatives.dart';
 import 'package:usg_mobile/backend/initiatives_record.dart';
 import 'package:usg_mobile/pages/login_page.dart';
 import 'package:usg_mobile/reusable_widgets/reusable_widget.dart';
@@ -82,7 +81,6 @@ class _CreateInitPage extends State<CreateInitPage> {
                       //                                         _model.textController.text,
                       //                                     postImage: _model.uploadedFileUrl3,
                       //                                   ));
-
                       InitiativeRecord.collection.doc().set(
                           InitiativeRecordToFirestore(
                               initiative_owner: user.email,

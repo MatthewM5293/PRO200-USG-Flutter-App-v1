@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:usg_mobile/Pages/InitiativePage.dart';
 import 'package:usg_mobile/backend/initiatives_record.dart';
@@ -14,6 +15,7 @@ void main() {
 class AnnouncementsPage extends StatelessWidget {
   const AnnouncementsPage({super.key});
 
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -27,21 +29,47 @@ class AnnouncementsPage extends StatelessWidget {
 class AnnouncementsHome extends StatefulWidget {
   AnnouncementsHome({super.key});
 
+  Future<List<QueryDocumentSnapshot<InitiativeRecord>>?> getInitiatives() async{
+    final ref = InitiativeRecord.collection.withConverter(fromFirestore: InitiativeRecord.fromFirestore, toFirestore: (InitiativeRecord initiative, _) => initiative.toFirestore());
+    final docSnap = await ref.get();
+    final allInits = docSnap.docs;
+
+    if(allInits != null){
+      initiatives = allInits;
+    }
+    else{
+      initiatives = null;
+    }
+  }
+
+  late int size;
+
+  late List<QueryDocumentSnapshot<InitiativeRecord>>? initiatives;
+
+  Future<void> initiativeSize () async {
+    var inits = await getInitiatives();
+    if(inits == null){
+      size = 0;
+    }
+    else{
+      size = inits.length;
+    }
+  }
+
   @override
   _AnnouncementsHomeState createState() => _AnnouncementsHomeState();
 }
 
 class _AnnouncementsHomeState extends State<AnnouncementsHome> {
+
   @override
   Widget build(BuildContext context) {
     // announcementList.clear();
-
     //iterates through the announcement lists
-    for (int i = 0; i < InitiativeRecord.collection.doc().get(); i++) {
+    for (int i = 0; i < widget.size; i++) {
       //generates random color for the container
       List colors = [Colors.amber, Colors.blue, Colors.deepPurple];
       Random random = new Random();
-
       //adds announcement to list
       announcementList.add(InkWell(
         child: Container(
@@ -53,11 +81,11 @@ class _AnnouncementsHomeState extends State<AnnouncementsHome> {
               children: [
                 Align(
                     alignment: Alignment.topLeft,
-                    child: Text(Initiatives.initiatives[i].title)),
+                    child: Text(widget.initiatives?.elementAt(i).)),
                 Align(
                     alignment: Alignment.topRight,
                     child:
-                        Text(Initiatives.initiatives[i].createDate.toString())),
+                        Text(initiatives.initiatives[i].createDate.toString())),
                 Align(
                     alignment: Alignment(-1.0, -0.75),
                     child: Text(Initiatives.initiatives[i].creator)),
@@ -67,10 +95,9 @@ class _AnnouncementsHomeState extends State<AnnouncementsHome> {
               ],
             )),
         onTap: () {
-          InitiativeRecord.initToLoad = i;
 
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return InitiativePage();
+            return InitiativePage(id: i,);
           }));
         },
       ));
@@ -107,5 +134,11 @@ class _AnnouncementsHomeState extends State<AnnouncementsHome> {
   void createInit(BuildContext context) {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => const CreateInitPage()));
+  }
+
+  @override
+  void initState() {
+    widget.initiativeSize();
+    widget.getInitiatives();
   }
 }

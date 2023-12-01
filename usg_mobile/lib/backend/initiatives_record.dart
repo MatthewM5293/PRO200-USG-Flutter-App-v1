@@ -26,23 +26,26 @@ class InitiativeRecord {
         signatures: data?['signatures']);
   }
 
+  Map<String, dynamic> toFirestore(
+  //     {
+  //   String? initiative_owner,
+  //   String? title,
+  //   String? description,
+  //   List<String>? signatures
+  // }
+  ) {
+    return {
+      if (initiative_owner != null) "initiative_owner": initiative_owner,
+      if (title != null) "title": title,
+      if (description != null) "description": description,
+      "createDate" : DateTime.now(),
+      "signatures": signatures,
+    };
+  }
+
   //get collection
-  static CollectionReference get collection =>
-      db.collection('Initiatives');
+  static CollectionReference get collection => db.collection('Initiatives');
+
 }
 
 
-Map<String, dynamic> InitiativeRecordToFirestore({
-  String? initiative_owner,
-  String? title,
-  String? description,
-  List<String>? signatures
-}) {
-  return {
-    if (initiative_owner != null) "initiative_owner": initiative_owner,
-    if (title != null) "title": title,
-    if (description != null) "description": description,
-    "createDate" : DateTime.now(),
-    "signatures": signatures,
-  };
-}

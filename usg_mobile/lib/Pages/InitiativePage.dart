@@ -1,11 +1,51 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:usg_mobile/Pages/Initiatives.dart';
+import 'package:usg_mobile/backend/initiatives_record.dart';
 
 class InitiativePage extends StatelessWidget {
 
-  String title = Initiatives.initiatives[Initiatives.initToLoad].title;
 
-  String desc = Initiatives.initiatives[Initiatives.initToLoad].description;
+  InitiativePage({super.key, required this.id});
+
+  final int id;
+
+  late String title;
+
+  late String description;
+
+  late String initiativeOwner;
+
+  late List<String>? signatures;
+
+  late DateTime createDate;
+
+  Future<InitiativeRecord?> getSelf(int id) async{
+    final ref = InitiativeRecord.collection.doc(id.toString()).withConverter(fromFirestore: InitiativeRecord.fromFirestore, toFirestore: (InitiativeRecord initiative, _) => initiative.toFirestore());
+    final docSnap = await ref.get();
+    final initiative = docSnap.data();
+
+    if(initiative != null){
+      return initiative;
+    }
+    else{
+      return null;
+    }
+  }
+
+  Future<void> createSelf() async{
+    InitiativeRecord? self = await getSelf(id);
+
+    if(self != null){
+      title = self.title!;
+      description = self.description!;
+      initiativeOwner = self.initiative_owner!;
+      signatures = self.signatures;
+      createDate = self.createDate!;
+    }
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +77,9 @@ class InitiativePage extends StatelessWidget {
 
             const Padding(padding: EdgeInsets.all(2.0)),
 
-            Text(title.toString()), //initiative title
+            Text(title), //initiative title
 
-            Text(desc.toString()), //description box
+            Text(description), //description box
 
             Row(
 
@@ -48,7 +88,7 @@ class InitiativePage extends StatelessWidget {
                 TextButton(
 
                   onPressed: (){
-                    Initiatives.initiatives[Initiatives.initToLoad].addSigs("adds current user's username");
+                    signatures?.add(FirebaseAuth.instance.currentUser!.displayName!);
                   },
 
                   child: const Text('Sign Initiative'),
@@ -59,7 +99,7 @@ class InitiativePage extends StatelessWidget {
 
                   onPressed: (){
 
-                    Initiatives.initiatives[Initiatives.initToLoad].removeSig("removes current user's username");
+                    signatures?.removeWhere((element) => element == FirebaseAuth.instance.currentUser!.displayName!);
 
                   },
 

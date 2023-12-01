@@ -40,21 +40,21 @@ class AllPage extends StatelessWidget {
 
               children: [
 
-                TextButton(
-
-                  onPressed: (){
-
-                  Navigator.push(context, MaterialPageRoute(builder: (context){
-
-                  return InitiativePage();
-
-                  }));
-
-                },
-
-                  child: const Text('Go To initiatives Page'),
-
-                ),
+                // // TextButton(
+                // //
+                // //   onPressed: (){
+                // //
+                // //   Navigator.push(context, MaterialPageRoute(builder: (context){
+                // //
+                // //   // return InitiativePage();
+                // //
+                // //   }));
+                // //
+                // // },
+                //
+                //   child: const Text('Go To initiatives Page'),
+                //
+                // ),
 
                 TextButton(
 
