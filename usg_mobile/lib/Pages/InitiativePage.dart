@@ -1,21 +1,51 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:usg_mobile/Pages/Initiatives.dart';
-import 'package:usg_mobile/Pages/TestingMainPage.dart';
-import 'package:usg_mobile/Pages/Initiatives.dart';
+import 'package:usg_mobile/backend/initiatives_record.dart';
 
-class InitiativePage extends StatefulWidget {
-  const InitiativePage({super.key});
+class InitiativePage extends StatelessWidget {
 
-  @override
-  State<StatefulWidget> createState() => _InitPage();
 
-}
+  InitiativePage({super.key, required this.id});
 
-  class _InitPage extends State<InitiativePage>{
+  final int id;
 
-    late String title = Initiatives.initiatives[AllPage.initOpen].title;
+  late String title;
 
-    late String desc = Initiatives.initiatives[AllPage.initOpen].description;
+  late String description;
+
+  late String initiativeOwner;
+
+  late List<String>? signatures;
+
+  late DateTime createDate;
+
+  Future<InitiativeRecord?> getSelf(int id) async{
+    final ref = InitiativeRecord.collection.doc(id.toString()).withConverter(fromFirestore: InitiativeRecord.fromFirestore, toFirestore: (InitiativeRecord initiative, _) => initiative.toFirestore());
+    final docSnap = await ref.get();
+    final initiative = docSnap.data();
+
+    if(initiative != null){
+      return initiative;
+    }
+    else{
+      return null;
+    }
+  }
+
+  Future<void> createSelf() async{
+    InitiativeRecord? self = await getSelf(id);
+
+    if(self != null){
+      title = self.title!;
+      description = self.description!;
+      initiativeOwner = self.initiative_owner!;
+      signatures = self.signatures;
+      createDate = self.createDate!;
+    }
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +61,8 @@ class InitiativePage extends StatefulWidget {
         backgroundColor: Colors.black26,
         centerTitle: true,
         flexibleSpace: Container(
-          child: Image.asset('assets/images/Neumont_logo.png'),
           padding: const EdgeInsets.fromLTRB(0.0, 20.0, 90.0, 0.0),
+          child: Image.asset('assets/images/Neumont_logo.png'),
         ),
 
       ),
@@ -49,7 +79,7 @@ class InitiativePage extends StatefulWidget {
 
             Text(title), //initiative title
 
-            Text(desc), //description box
+            Text(description), //description box
 
             Row(
 
@@ -58,11 +88,7 @@ class InitiativePage extends StatefulWidget {
                 TextButton(
 
                   onPressed: (){
-
-                    Initiatives.initiatives[AllPage.initOpen].addSigs("doge");
-
-                    Initiatives.initiatives[AllPage.initOpen].printSigs();
-
+                    signatures?.add(FirebaseAuth.instance.currentUser!.displayName!);
                   },
 
                   child: const Text('Sign Initiative'),
@@ -73,9 +99,7 @@ class InitiativePage extends StatefulWidget {
 
                   onPressed: (){
 
-                    Initiatives.initiatives[AllPage.initOpen].removeSig("doge");
-
-                    Initiatives.initiatives[AllPage.initOpen].printSigs();
+                    signatures?.removeWhere((element) => element == FirebaseAuth.instance.currentUser!.displayName!);
 
                   },
 

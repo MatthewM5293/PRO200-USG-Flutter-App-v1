@@ -25,8 +25,8 @@ class AllPage extends StatelessWidget {
         backgroundColor: Colors.black26,
         centerTitle: true,
         flexibleSpace: Container(
-          child: Image.asset('assets/images/Neumont_logo.png'),
           padding: const EdgeInsets.fromLTRB(0.0, 20.0, 90.0, 0.0),
+          child: Image.asset('assets/images/Neumont_logo.png'),
         ),
 
       ),
@@ -43,21 +43,21 @@ class AllPage extends StatelessWidget {
 
               children: [
 
-                TextButton(
-
-                  onPressed: (){
-
-                  Navigator.push(context, MaterialPageRoute(builder: (context){
-
-                  return InitiativePage();
-
-                  }));
-
-                },
-
-                  child: const Text('Go To initiatives Page'),
-
-                ),
+                // // TextButton(
+                // //
+                // //   onPressed: (){
+                // //
+                // //   Navigator.push(context, MaterialPageRoute(builder: (context){
+                // //
+                // //   // return InitiativePage();
+                // //
+                // //   }));
+                // //
+                // // },
+                //
+                //   child: const Text('Go To initiatives Page'),
+                //
+                // ),
 
                 TextButton(
 
