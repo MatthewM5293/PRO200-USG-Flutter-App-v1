@@ -112,16 +112,6 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
-            ),TextButton(
-
-              onPressed: (){
-
-                Navigator.push(context, MaterialPageRoute(builder: (context){
-
-                  return const AboutUsg();}));},
-
-              child: const Text('AboutUsg'),
-
             ),
           ],
         ),
