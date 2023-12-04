@@ -7,11 +7,11 @@ class InitiativeRecord {
   String? initiative_owner;
   String? title;
   String? description;
-  List<String>? signatures;
   DateTime? createDate;
+  List<String>? signatures;
 
   InitiativeRecord(
-      {this.initiative_owner, this.title, this.description, this.signatures, this.createDate});
+      {this.initiative_owner, this.title, this.description, this.createDate, this.signatures});
 
   factory InitiativeRecord.fromFirestore(
     DocumentSnapshot<Map<String, dynamic>> snapshot,
@@ -27,12 +27,12 @@ class InitiativeRecord {
   }
 
   Map<String, dynamic> toFirestore(
-       {
+      {
      String? initiative_owner,
      String? title,
      String? description,
      List<String>? signatures
-  }
+   }
   ) {
     return {
       if (initiative_owner != null) "initiative_owner": initiative_owner,

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:usg_mobile/backend/initiatives_record.dart';
 import 'package:usg_mobile/pages/login_page.dart';
@@ -81,20 +82,15 @@ class _CreateInitPage extends State<CreateInitPage> {
                       //                                         _model.textController.text,
                       //                                     postImage: _model.uploadedFileUrl3,
                       //                                   ));
-                          InitiativeRecord.collection.doc().set(
-                          initiative_owner: user.email,
-                          title: title,
-                          description: desc,
-                          createDate: DateTime.now(),
-                          signatures: List.empty()
-                      );
-
-
-                      // Initiatives.createInit(
-                      //   title,
-                      //   desc,
-                      //   user.email.toString(),
-                      // );
+                      //FirebaseFirestore.instance.collection("Initiatives").add(
+                      InitiativeRecord.collection.add(
+                        {
+                        "initiative_owner": user.email,
+                        "title": title,
+                        "description": desc,
+                        "createDate": DateTime.now(),
+                        "signatures": List.empty()
+                        });
                       Navigator.pop(context);
                     } else {
                       Navigator.push(
