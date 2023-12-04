@@ -81,17 +81,17 @@ class _AnnouncementsHomeState extends State<AnnouncementsHome> {
               children: [
                 Align(
                     alignment: Alignment.topLeft,
-                    child: Text(widget.initiatives?.elementAt(i).)),
+                    child: Text(widget.initiatives!.elementAt(i).data().title.toString())),
                 Align(
                     alignment: Alignment.topRight,
                     child:
-                        Text(initiatives.initiatives[i].createDate.toString())),
+                        Text(widget.initiatives!.elementAt(i).data().createDate.toString())),
                 Align(
                     alignment: Alignment(-1.0, -0.75),
-                    child: Text(Initiatives.initiatives[i].creator)),
+                    child: Text(widget.initiatives!.elementAt(i).data().initiative_owner.toString())),
                 Align(
                     alignment: Alignment(-1.0, -0.50),
-                    child: Text(Initiatives.initiatives[i].description))
+                    child: Text(widget.initiatives!.elementAt(i).data().description.toString()))
               ],
             )),
         onTap: () {

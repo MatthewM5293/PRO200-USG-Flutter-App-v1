@@ -81,12 +81,14 @@ class _CreateInitPage extends State<CreateInitPage> {
                       //                                         _model.textController.text,
                       //                                     postImage: _model.uploadedFileUrl3,
                       //                                   ));
-                      InitiativeRecord.collection.doc().set(
-                          InitiativeRecordToFirestore(
-                              initiative_owner: user.email,
-                              title: title,
-                              description: desc,
-                              signatures: List.empty()));
+                          InitiativeRecord.collection.doc().set(
+                          initiative_owner: user.email,
+                          title: title,
+                          description: desc,
+                          createDate: DateTime.now(),
+                          signatures: List.empty()
+                      );
+
 
                       // Initiatives.createInit(
                       //   title,

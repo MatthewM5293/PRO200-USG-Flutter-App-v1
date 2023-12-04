@@ -27,12 +27,12 @@ class InitiativeRecord {
   }
 
   Map<String, dynamic> toFirestore(
-  //     {
-  //   String? initiative_owner,
-  //   String? title,
-  //   String? description,
-  //   List<String>? signatures
-  // }
+       {
+     String? initiative_owner,
+     String? title,
+     String? description,
+     List<String>? signatures
+  }
   ) {
     return {
       if (initiative_owner != null) "initiative_owner": initiative_owner,
