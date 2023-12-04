@@ -66,46 +66,6 @@ class AboutUsg extends StatelessWidget {
             )
           ],
         ),
-        // child: Row(
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        //   children: [
-        //     Row(
-        //       children: [
-        //         Column(
-        //           children: [
-        //             const Padding(
-        //                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0)),
-        //             Image.asset('assets/images/NeumontLogo.png',
-        //                 height: 100, width: 100),
-        //           ],
-        //         ),
-        //         const Column(
-        //           children: [
-        //             Padding(
-        //                 padding: EdgeInsetsDirectional.fromSTEB(0, 25, 0, 0)),
-        //             Text(
-        //               "USG",
-        //               style:
-        //                   TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-        //             )
-        //           ],
-        //         ),
-        //       ],
-        //     ),
-        //     const Row(
-        //       mainAxisAlignment: MainAxisAlignment.center,
-        //       children: [
-        //         Column(children: [
-        //           Padding(padding: EdgeInsetsDirectional.fromSTEB(0, 25, 0, 0)),
-        //           Text(
-        //             'Testing',
-        //             textAlign: TextAlign.center,
-        //           )
-        //         ])
-        //       ],
-        //     )
-        //   ],
-        // ),
       ),
     );
   }
