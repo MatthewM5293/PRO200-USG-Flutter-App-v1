@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:usg_mobile/Pages/InitiativePage.dart';
 import 'package:usg_mobile/backend/initiatives_record.dart';
@@ -29,7 +31,9 @@ class AnnouncementsPage extends StatelessWidget {
 class AnnouncementsHome extends StatefulWidget {
   AnnouncementsHome({super.key});
 
-  Future<List<QueryDocumentSnapshot<InitiativeRecord>>?> getInitiatives() async{
+  DatabaseReference ref = FirebaseDatabase.instance.ref("Initiatives");
+
+  /*Future<List<QueryDocumentSnapshot<InitiativeRecord>>?> getInitiatives() async{
     final ref = InitiativeRecord.collection.withConverter(fromFirestore: InitiativeRecord.fromFirestore, toFirestore: (InitiativeRecord initiative, _) => initiative.toFirestore());
     final docSnap = await ref.get();
     final allInits = docSnap.docs;
@@ -40,10 +44,11 @@ class AnnouncementsHome extends StatefulWidget {
     else{
       initiatives = null;
     }
+
+    return allInits;
   }
 
   late int size;
-
   late List<QueryDocumentSnapshot<InitiativeRecord>>? initiatives;
 
   Future<void> initiativeSize () async {
@@ -54,7 +59,7 @@ class AnnouncementsHome extends StatefulWidget {
     else{
       size = inits.length;
     }
-  }
+  }*/
 
   @override
   _AnnouncementsHomeState createState() => _AnnouncementsHomeState();
@@ -64,44 +69,8 @@ class _AnnouncementsHomeState extends State<AnnouncementsHome> {
 
   @override
   Widget build(BuildContext context) {
-    // announcementList.clear();
-    //iterates through the announcement lists
-    for (int i = 0; i < widget.size; i++) {
-      //generates random color for the container
-      List colors = [Colors.amber, Colors.blue, Colors.deepPurple];
-      Random random = new Random();
-      //adds announcement to list
-      announcementList.add(InkWell(
-        child: Container(
-            height: 150,
-            width: MediaQuery.of(context).size.width,
-            color: colors.elementAt(random.nextInt(colors.length)),
-            margin: const EdgeInsets.all(16.0),
-            child: Stack(
-              children: [
-                Align(
-                    alignment: Alignment.topLeft,
-                    child: Text(widget.initiatives!.elementAt(i).data().title.toString())),
-                Align(
-                    alignment: Alignment.topRight,
-                    child:
-                        Text(widget.initiatives!.elementAt(i).data().createDate.toString())),
-                Align(
-                    alignment: Alignment(-1.0, -0.75),
-                    child: Text(widget.initiatives!.elementAt(i).data().initiative_owner.toString())),
-                Align(
-                    alignment: Alignment(-1.0, -0.50),
-                    child: Text(widget.initiatives!.elementAt(i).data().description.toString()))
-              ],
-            )),
-        onTap: () {
 
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return InitiativePage(id: i,);
-          }));
-        },
-      ));
-    }
+    print("Hello World!");
 
     return Scaffold(
       appBar: AppBar(
@@ -117,8 +86,15 @@ class _AnnouncementsHomeState extends State<AnnouncementsHome> {
           child: Image.asset('assets/images/Neumont_logo.png'),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(children: announcementList),
+      body: FirebaseAnimatedList(
+        query: widget.ref,
+        itemBuilder: (BuildContext context, DataSnapshot snapshot,
+        Animation<double> animation, int index) {
+          return ListTile(
+            title: Text(snapshot.value['title']),
+            subtitle: Text(snapshot.value['description']),
+          );
+        }
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -138,7 +114,11 @@ class _AnnouncementsHomeState extends State<AnnouncementsHome> {
 
   @override
   void initState() {
-    widget.initiativeSize();
-    widget.getInitiatives();
+    /*widget.initiativeSize();
+    widget.getInitiatives();*/
   }
+
+  /*body: SingleChildScrollView(
+  child: Column(children: announcementList),
+  ),*/
 }
