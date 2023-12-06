@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:usg_mobile/Pages/InitiativePage.dart';
 import 'package:usg_mobile/backend/initiatives_record.dart';
@@ -31,7 +32,7 @@ class AnnouncementsPage extends StatelessWidget {
 class AnnouncementsHome extends StatefulWidget {
   AnnouncementsHome({super.key});
 
-  DatabaseReference ref = FirebaseDatabase.instance.ref("Initiatives");
+  late final DatabaseReference ref = FirebaseDatabase.instance.ref("Initiatives");
 
   /*Future<List<QueryDocumentSnapshot<InitiativeRecord>>?> getInitiatives() async{
     final ref = InitiativeRecord.collection.withConverter(fromFirestore: InitiativeRecord.fromFirestore, toFirestore: (InitiativeRecord initiative, _) => initiative.toFirestore());
@@ -70,8 +71,6 @@ class _AnnouncementsHomeState extends State<AnnouncementsHome> {
   @override
   Widget build(BuildContext context) {
 
-    print("Hello World!");
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -90,9 +89,11 @@ class _AnnouncementsHomeState extends State<AnnouncementsHome> {
         query: widget.ref,
         itemBuilder: (BuildContext context, DataSnapshot snapshot,
         Animation<double> animation, int index) {
+          var value = Map<String, dynamic>.from(snapshot.value as Map);
+
           return ListTile(
-            title: Text(snapshot.value['title']),
-            subtitle: Text(snapshot.value['description']),
+            title: Text(value['title']),
+            subtitle: Text(value['description']),
           );
         }
       ),
