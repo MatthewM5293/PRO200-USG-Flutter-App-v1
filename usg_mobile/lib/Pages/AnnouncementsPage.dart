@@ -40,9 +40,10 @@ class AnnouncementsHome extends StatefulWidget {
     else{
       initiatives = null;
     }
+
   }
 
-  late int size;
+  int size = 0;
 
   late List<QueryDocumentSnapshot<InitiativeRecord>>? initiatives;
 

@@ -69,28 +69,13 @@ class _CreateInitPage extends State<CreateInitPage> {
                   desc = descController.text;
                   FirebaseAuth.instance.authStateChanges().listen((User? user) {
                     if (user != null) {
-                      //await PostsRecord.collection
-                      //                                   .doc()
-                      //                                   .set(createPostsRecordData(
-                      //                                     postCaption: _model.textController.text,
-                      //                                     postDate: getCurrentTimestamp,
-                      //                                     postEditdate: null,
-                      //                                     postCommentsEnabled:
-                      //                                         _model.commentsEnabledValue,
-                      //                                     postOwner: currentUserReference,
-                      //                                     postOriginalCaption:
-                      //                                         _model.textController.text,
-                      //                                     postImage: _model.uploadedFileUrl3,
-                      //                                   ));
-                      //FirebaseFirestore.instance.collection("Initiatives").add(
-                      InitiativeRecord.collection.add(
-                        {
+                      InitiativeRecord.collection.add({
                         "initiative_owner": user.email,
                         "title": title,
                         "description": desc,
                         "createDate": DateTime.now(),
                         "signatures": List.empty()
-                        });
+                      });
                       Navigator.pop(context);
                     } else {
                       Navigator.push(
@@ -99,7 +84,6 @@ class _CreateInitPage extends State<CreateInitPage> {
                               builder: (context) => const LoginWidget()));
                     }
                   });
-
                   //clears text fields
                   titleController.text = '';
                   descController.text = '';
@@ -110,5 +94,3 @@ class _CreateInitPage extends State<CreateInitPage> {
         ));
   }
 }
-
-//body: ,
