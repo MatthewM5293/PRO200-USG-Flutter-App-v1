@@ -1,77 +1,27 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
-import 'package:usg_mobile/Pages/InitiativePage.dart';
+import 'package:go_router/go_router.dart';
 import 'package:usg_mobile/backend/initiatives_record.dart';
 import 'package:usg_mobile/pages/CreateInitPage.dart';
+import 'package:usg_mobile/reusable_widgets/reusable_widget.dart';
+
+import 'InitiativePage.dart';
 
 List<Widget> announcementList = <Widget>[];
 
-void main() {
-  runApp(const AnnouncementsPage());
-}
-
-class AnnouncementsPage extends StatelessWidget {
+class AnnouncementsPage extends StatefulWidget {
   const AnnouncementsPage({super.key});
 
-
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(fontFamily: "whiteMountainView"),
-        home: AnnouncementsHome());
-  }
+  State<StatefulWidget> createState() => _AnnouncementsPage();
 }
 
-class AnnouncementsHome extends StatefulWidget {
-  AnnouncementsHome({super.key});
-
-  DatabaseReference ref = FirebaseDatabase.instance.ref("Initiatives");
-
-  /*Future<List<QueryDocumentSnapshot<InitiativeRecord>>?> getInitiatives() async{
-    final ref = InitiativeRecord.collection.withConverter(fromFirestore: InitiativeRecord.fromFirestore, toFirestore: (InitiativeRecord initiative, _) => initiative.toFirestore());
-    final docSnap = await ref.get();
-    final allInits = docSnap.docs;
-
-    if(allInits != null){
-      initiatives = allInits;
-    }
-    else{
-      initiatives = null;
-    }
-
-    return allInits;
-  }
-
-  late int size;
-  late List<QueryDocumentSnapshot<InitiativeRecord>>? initiatives;
-
-  Future<void> initiativeSize () async {
-    var inits = await getInitiatives();
-    if(inits == null){
-      size = 0;
-    }
-    else{
-      size = inits.length;
-    }
-  }*/
-
-  @override
-  _AnnouncementsHomeState createState() => _AnnouncementsHomeState();
-}
-
-class _AnnouncementsHomeState extends State<AnnouncementsHome> {
+class _AnnouncementsPage extends State<AnnouncementsPage> {
+  final _InitStream =
+      FirebaseFirestore.instance.collection('Initiatives').snapshots();
 
   @override
   Widget build(BuildContext context) {
-
-    print("Hello World!");
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -86,39 +36,50 @@ class _AnnouncementsHomeState extends State<AnnouncementsHome> {
           child: Image.asset('assets/images/Neumont_logo.png'),
         ),
       ),
-      body: FirebaseAnimatedList(
-        query: widget.ref,
-        itemBuilder: (BuildContext context, DataSnapshot snapshot,
-        Animation<double> animation, int index) {
-          return ListTile(
-            title: Text(snapshot.value['title']),
-            subtitle: Text(snapshot.value['description']),
-          );
-        }
+      body: StreamBuilder(
+        stream: _InitStream,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Text('loading'); //can be loading icon
+          } else if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          } else if (!snapshot.hasData || snapshot.data?.docs.isEmpty == true) {
+            return const Text(
+                'Announcements cannot be accessed, try again later!');
+          } else {
+            var docs = snapshot.data!.docs;
+            return ListView.builder(
+                itemCount: docs.length,
+                itemBuilder: (context, index) {
+                  Map<String, dynamic> initiative = InitiativeRecord().
+                  return reusableAnnouncement2(
+                      context,
+                      docs[index]['title'],
+                      docs[index]['description'],
+                      docs[index]['initiative_owner'],
+                      // docs[index]['createDate'] as Timestamp,
+                      () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return InitiativePage();
+                    }));
+                  });
+                });
+          }
+        },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const CreateInitPage()));
+          createInit(context);
         },
         tooltip: 'Create',
         child: const Icon(Icons.add),
       ),
     );
   }
+}
 
-  void createInit(BuildContext context) {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const CreateInitPage()));
-  }
-
-  @override
-  void initState() {
-    /*widget.initiativeSize();
-    widget.getInitiatives();*/
-  }
-
-  /*body: SingleChildScrollView(
-  child: Column(children: announcementList),
-  ),*/
+void createInit(BuildContext context) {
+  Navigator.push(
+      context, MaterialPageRoute(builder: (context) => const CreateInitPage()));
 }
