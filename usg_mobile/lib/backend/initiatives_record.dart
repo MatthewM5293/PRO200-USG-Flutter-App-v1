@@ -17,17 +17,31 @@ class InitiativeRecord {
       this.createDate,
       this.signatures});
 
+  // factory InitiativeRecord.fromFirestore(
+  //   DocumentSnapshot<Map<String, dynamic>> snapshot,
+  //   SnapshotOptions? options,
+  // ) {
+  //   final data = snapshot.data();
+  //   return InitiativeRecord(
+  //       initiative_owner: data?['initiative_owner'],
+  //       title: data?['title'],
+  //       description: data?['description'],
+  //       createDate: data?['createDate'],
+  //       signatures: data?['signatures']);
+  // }
+
   factory InitiativeRecord.fromFirestore(
-    DocumentSnapshot<Map<String, dynamic>> snapshot,
-    SnapshotOptions? options,
-  ) {
+      DocumentSnapshot<Map<String, dynamic>> snapshot,
+      SnapshotOptions? options,
+      ) {
     final data = snapshot.data();
     return InitiativeRecord(
-        initiative_owner: data?['initiative_owner'],
-        title: data?['title'],
-        description: data?['description'],
-        createDate: data?['createDate'],
-        signatures: data?['signatures']);
+      initiative_owner: data?['initiative_owner'] as String?,
+      title: data?['title'] as String?,
+      description: data?['description'] as String?,
+      createDate: (data?['createDate'] as Timestamp?)?.toDate(),
+      signatures: (data?['signatures'] as List<dynamic>?)?.cast<String>(),
+    );
   }
 
   Map<String, dynamic> toFirestore({
@@ -44,6 +58,19 @@ class InitiativeRecord {
       "createDate": createDate ?? DateTime.now(),
       "signatures": signatures,
     };
+  }
+
+  //signatures
+  Future<void> addSignature(DocumentReference initiativeRef, String displayName) async {
+    await initiativeRef.update({
+      'signatures': FieldValue.arrayUnion([displayName]),
+    });
+  }
+
+  Future<void> removeSignature(DocumentReference initiativeRef, String displayName) async {
+    await initiativeRef.update({
+      'signatures': FieldValue.arrayRemove([displayName]),
+    });
   }
 
   //get collection

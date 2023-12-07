@@ -59,6 +59,7 @@ class _CreateInitPage extends State<CreateInitPage> {
                 ],
               ),
             ),
+            const SizedBox(height: 20.0),
             Row(
               children: [
                 reusableButton(context, "Back", () {
@@ -69,13 +70,17 @@ class _CreateInitPage extends State<CreateInitPage> {
                   desc = descController.text;
                   FirebaseAuth.instance.authStateChanges().listen((User? user) {
                     if (user != null) {
-                      InitiativeRecord.collection.add({
-                        "initiative_owner": user.email,
-                        "title": title,
-                        "description": desc,
-                        "createDate": DateTime.now(),
-                        "signatures": List.empty()
-                      });
+                      if (title.isNotEmpty && desc.isNotEmpty) {
+                        InitiativeRecord.collection.add({
+                          "initiative_owner": user.email,
+                          "title": title,
+                          "description": desc,
+                          "createDate": DateTime.now(),
+                          "signatures": List.empty()
+                        });
+                      } else {
+                        return;
+                      }
                       Navigator.pop(context);
                     } else {
                       Navigator.push(

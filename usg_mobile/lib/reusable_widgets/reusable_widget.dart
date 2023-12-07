@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:relative_time/relative_time.dart';
+import 'package:usg_mobile/pages/login_page.dart';
 
 TextFormField reusableTextField(String labelText, IconData iconData,
     bool isPasswordType, TextEditingController controller) {
@@ -108,58 +110,35 @@ Container reusableButton(BuildContext context, String buttonText,
   );
 }
 
+Container reusableButtonWithChild(BuildContext context, Function onClick,
+    double L, double T, double R, double B, Widget child) {
+  return Container(
+    alignment: Alignment.centerRight,
+    width: 200,
+    height: 50,
+    margin: EdgeInsets.fromLTRB(L, T, R, B),
+    // margin: const EdgeInsets.fromLTRB(0, 10, 0, 20),
+    decoration: BoxDecoration(borderRadius: BorderRadius.circular(90.0)),
+    child: ElevatedButton(
+      onPressed: () {
+        onClick();
+      },
+      style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.resolveWith((states) {
+            if (states.contains(MaterialState.pressed)) {
+              return Colors.black;
+            }
+            return Colors.black;
+          }),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0)))),
+      child: child,
+    ),
+  );
+}
+
 //Annoucement
-// InkWell reusableAnnoucenment(BuildContext context, String? title, String? body,
-//     String? owner, Timestamp? date, Function? onTapFunc) {
-//   return InkWell(
-//     onTap: onTapFunc as void Function()?,
-//     child: Container(
-//         height: 150,
-//         width: MediaQuery.of(context).size.width,
-//         margin: const EdgeInsets.all(16.0),
-//         child: Stack(
-//           children: [
-//             Align(alignment: Alignment.topLeft, child: Text(title!)),
-//             Align(
-//                 alignment: Alignment.topRight,
-//                 child: Text(
-//                     RelativeTime(context).format(date!.toDate()).toString())),
-//             Align(
-//               alignment: const Alignment(-1.0, -0.75),
-//               child: Text(owner!),
-//             ),
-//             Align(alignment: const Alignment(-1.0, -0.50), child: Text(body!))
-//           ],
-//         )),
-//   );
-// }
-
-// ListTile reusableAnnoucenment2(BuildContext context, String title, String body,
-//     String owner,  Function? onTapFunc) {
-//   return ListTile(
-//     onTap: onTapFunc as void Function()?,
-//     subtitle: Container(
-//       color: Colors.black12,
-//         height: 150,
-//         width: MediaQuery.of(context).size.width,
-//         margin: const EdgeInsets.all(16.0),
-//         child: Stack(
-//           children: [
-//             Align(alignment: Alignment.topLeft, child: Text(title!)),
-//             // Align(
-//             //     alignment: Alignment.topRight,
-//             //     child: Text(
-//             //         RelativeTime(context).format(date!.toDate()).toString())),
-//             Align(
-//               alignment: const Alignment(-1.0, -0.75),
-//               child: Text(owner!),
-//             ),
-//             Align(alignment: const Alignment(-1.0, -0.50), child: Text(body!))
-//           ],
-//         )),
-//   );
-// }
-
 Widget reusableAnnouncement(BuildContext context, String title, String body,
     String owner, Color color, Function? onTapFunc) {
   return Card(
@@ -193,7 +172,101 @@ Widget reusableAnnouncement(BuildContext context, String title, String body,
   );
 }
 
+//Card
+Widget reusableCard(BuildContext context, String title, String description,
+    String name, String date) {
+  return Card(
+    elevation: 4.0,
+    // margin: const EdgeInsets.all(16.0),
+    child: Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 8.0),
+          Text(
+            description,
+            style: const TextStyle(fontSize: 16),
+          ),
+          const SizedBox(height: 8.0),
+          Text(
+            name,
+            style: const TextStyle(fontSize: 16),
+          ),
+          const SizedBox(height: 8.0),
+          Text(
+            date,
+            style: const TextStyle(fontSize: 16),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+// class ReusableCard extends StatelessWidget {
+//   final String title;
+//   final String description;
+//   final String name;
+//   final String date;
+//
+//   ReusableCard({
+//     required this.title,
+//     required this.description,
+//     required this.name,
+//     required this.date,
+//   });
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Card(
+//       elevation: 4.0,
+//       margin: const EdgeInsets.all(16.0),
+//       child: Padding(
+//         padding: const EdgeInsets.all(16.0),
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             Text(
+//               title,
+//               style: const TextStyle(
+//                 fontSize: 18,
+//                 fontWeight: FontWeight.bold,
+//               ),
+//             ),
+//             const SizedBox(height: 8.0),
+//             Text(
+//               description,
+//               style: const TextStyle(fontSize: 16),
+//             ),
+//             const SizedBox(height: 8.0),
+//             Text(
+//               name,
+//               style: const TextStyle(fontSize: 16),
+//             ),
+//             const SizedBox(height: 8.0),
+//             Text(
+//               date,
+//               style: const TextStyle(fontSize: 16),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+
 //sign out button?
-//FirebaseAuth.instance.signOut().then((value) {
-//Navigator.push(context, MaterialPageRoute(builder: (context) => LoginWidget()));
-// });
+// Widget singOutButton(BuildContext context) async {
+//   FirebaseAuth.instance.signOut().then((value) {
+//     Navigator.pushReplacement(
+//         context, MaterialPageRoute(builder: (context) => const LoginWidget()));
+//   });
+// }
