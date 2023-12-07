@@ -56,7 +56,7 @@ class _AnnouncementsPage extends State<AnnouncementsPage> {
                       docs[index]['title'],
                       docs[index]['description'],
                       docs[index]['initiative_owner'],
-                      Colors.black26,
+                      Colors.yellow,
                       // docs[index]['createDate'] as Timestamp,
                       () {
                     Navigator.push(context,
@@ -75,6 +75,7 @@ class _AnnouncementsPage extends State<AnnouncementsPage> {
         tooltip: 'Create',
         child: const Icon(Icons.add),
       ),
+      backgroundColor: Colors.grey,
     );
   }
 }

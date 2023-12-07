@@ -166,6 +166,10 @@ Widget reusableAnnouncement(BuildContext context, String title, String body,
     color: color,
     elevation: 3,
     margin: const EdgeInsets.all(8.0),
+    shape: RoundedRectangleBorder(
+      side: const BorderSide(color: Colors.black87, width: 2),
+      borderRadius: BorderRadius.circular(10),
+    ),
     child: ListTile(
       onTap: onTapFunc as void Function()?,
       title: Text(
@@ -179,7 +183,7 @@ Widget reusableAnnouncement(BuildContext context, String title, String body,
           children: [
             Text(
               owner,
-              style: const TextStyle(color: Colors.grey),
+              style: const TextStyle(color: Colors.black45),
             ),
             const SizedBox(height: 4),
             Text(
