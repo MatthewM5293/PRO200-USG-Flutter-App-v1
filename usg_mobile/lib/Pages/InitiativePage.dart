@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:usg_mobile/backend/initiatives_record.dart';
 
 class InitiativePage extends StatelessWidget {
-  final InitiativeRecord initiative;
+  late InitiativeRecord initiative = InitiativeRecord().getSelf(dateTime) as InitiativeRecord;
+  final DateTime dateTime;
 
-  InitiativePage({required this.initiative});
+  InitiativePage({required this.dateTime});
 
   late String? title = this.initiative.title;
   late String? description = this.initiative.description;

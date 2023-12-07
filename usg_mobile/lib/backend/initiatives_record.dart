@@ -30,16 +30,18 @@ class InitiativeRecord {
         signatures: data?['signatures']);
   }
 
-  Map<String, dynamic> toFirestore(
-      {String? initiative_owner,
-      String? title,
-      String? description,
-      List<String>? signatures}) {
+  Map<String, dynamic> toFirestore({
+    String? initiative_owner,
+    String? title,
+    String? description,
+    List<String>? signatures,
+    DateTime? createDate,
+  }) {
     return {
       if (initiative_owner != null) "initiative_owner": initiative_owner,
       if (title != null) "title": title,
       if (description != null) "description": description,
-      "createDate": DateTime.now(),
+      "createDate": createDate ?? DateTime.now(),
       "signatures": signatures,
     };
   }
@@ -47,17 +49,34 @@ class InitiativeRecord {
   //get collection
   static CollectionReference get collection => db.collection('Initiatives');
 
-  // Future<List<InitiativeRecord>> getAllCollections() async {
-  //   QuerySnapshot collections = await db.collectionGroup('Initiatives').get();
-  //
-  //   return collections as List<InitiativeRecord>;
-  // }
+  Future<void> createNewInitiative({
+    String? initiative_owner,
+    String? title,
+    String? description,
+    List<String>? signatures,
+  }) async {
+    await InitiativeRecord.collection.add(
+      InitiativeRecord().toFirestore(
+        initiative_owner: initiative_owner,
+        title: title,
+        description: description,
+        signatures: signatures,
+      ),
+    );
+  }
 
-  Future<List<InitiativeRecord>> getAllInitiatives() async {
-    final snapShot = await db.collection("Initiatives").get();
-    final initData = snapShot.docs
-        .map((e) => InitiativeRecord.fromFirestore(e, null))
-        .toList();
-    return initData;
+  Future<InitiativeRecord?> getSelf(DateTime timestamp) async {
+    final querySnapshot = await InitiativeRecord.collection
+        .where('createDate', isEqualTo: timestamp)
+        .limit(1)
+        .get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      final DocumentSnapshot<Map<String, dynamic>> docSnapshot =
+          querySnapshot.docs.first as DocumentSnapshot<Map<String, dynamic>>;
+      return InitiativeRecord.fromFirestore(docSnapshot, null);
+    } else {
+      return null;
+    }
   }
 }

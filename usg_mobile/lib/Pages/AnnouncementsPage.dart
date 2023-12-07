@@ -51,17 +51,17 @@ class _AnnouncementsPage extends State<AnnouncementsPage> {
             return ListView.builder(
                 itemCount: docs.length,
                 itemBuilder: (context, index) {
-                  Map<String, dynamic> initiative = InitiativeRecord().
-                  return reusableAnnouncement2(
+                  return reusableAnnouncement(
                       context,
                       docs[index]['title'],
                       docs[index]['description'],
                       docs[index]['initiative_owner'],
+                      Colors.black26,
                       // docs[index]['createDate'] as Timestamp,
                       () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return InitiativePage();
+                      return const CreateInitPage();
                     }));
                   });
                 });
