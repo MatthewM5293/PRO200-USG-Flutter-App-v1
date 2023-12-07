@@ -5,47 +5,43 @@ import 'package:flutter/material.dart';
 import 'package:usg_mobile/backend/initiatives_record.dart';
 
 class InitiativePage extends StatelessWidget {
+  late InitiativeRecord initiative = InitiativeRecord().getSelf(dateTime) as InitiativeRecord;
+  final DateTime dateTime;
 
+  InitiativePage({required this.dateTime});
 
-  InitiativePage({super.key, required this.id});
+  late String? title = this.initiative.title;
+  late String? description = this.initiative.description;
+  late String? initiativeOwner = this.initiative.initiative_owner;
+  late List<String>? signatures = this.initiative.signatures;
+  late DateTime? createDate = this.initiative.createDate;
 
-  final int id;
-
-  late String title;
-
-  late String description;
-
-  late String initiativeOwner;
-
-  late List<String>? signatures;
-
-  late DateTime createDate;
-
-  Future<InitiativeRecord?> getSelf(int id) async{
-    final ref = InitiativeRecord.collection.doc(id.toString()).withConverter(fromFirestore: InitiativeRecord.fromFirestore, toFirestore: (InitiativeRecord initiative, _) => initiative.toFirestore());
+  Future<InitiativeRecord?> getSelf(int id) async {
+    final ref = InitiativeRecord.collection.doc().withConverter(
+        fromFirestore: InitiativeRecord.fromFirestore,
+        toFirestore: (InitiativeRecord initiative, _) =>
+            initiative.toFirestore());
     final docSnap = await ref.get();
     final initiative = docSnap.data();
 
-    if(initiative != null){
+    if (initiative != null) {
       return initiative;
-    }
-    else{
+    } else {
       return null;
     }
   }
 
-  Future<void> createSelf() async{
-    InitiativeRecord? self = await getSelf(id);
-
-    if(self != null){
-      title = self.title!;
-      description = self.description!;
-      initiativeOwner = self.initiative_owner!;
-      signatures = self.signatures;
-      createDate = self.createDate!;
-    }
-
-  }
+  // Future<void> createSelf() async {
+  //   InitiativeRecord? self = await getSelf(id);
+  //
+  //   if (self != null) {
+  //     title = self.title!;
+  //     description = self.description!;
+  //     initiativeOwner = self.initiative_owner!;
+  //     signatures = self.signatures;
+  //     createDate = self.createDate!;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -54,9 +50,7 @@ class InitiativePage extends StatelessWidget {
         title: Text(
           'USG',
           style: TextStyle(
-              color: Colors.yellow.shade600,
-              fontWeight: FontWeight.bold
-          ),
+              color: Colors.yellow.shade600, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.black26,
         centerTitle: true,
@@ -64,71 +58,53 @@ class InitiativePage extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(0.0, 20.0, 90.0, 0.0),
           child: Image.asset('assets/images/Neumont_logo.png'),
         ),
-
       ),
 
       //your stuff
 
       body: Center(
-
         child: Column(
-
           children: [
-
             const Padding(padding: EdgeInsets.all(2.0)),
 
-            Text(title), //initiative title
+            Text(title!), //initiative title
 
-            Text(description), //description box
+            Text(description!), //description box
 
             Row(
-
               children: [
-
                 TextButton(
-
-                  onPressed: (){
-                    signatures?.add(FirebaseAuth.instance.currentUser!.displayName!);
+                  onPressed: () {
+                    signatures
+                        ?.add(FirebaseAuth.instance.currentUser!.displayName!);
                   },
-
                   child: const Text('Sign Initiative'),
-
                 ),
-
                 TextButton(
-
-                  onPressed: (){
-
-                    signatures?.removeWhere((element) => element == FirebaseAuth.instance.currentUser!.displayName!);
-
+                  onPressed: () {
+                    signatures?.removeWhere((element) =>
+                        element ==
+                        FirebaseAuth.instance.currentUser!.displayName!);
                   },
-
                   child: const Text('Undo Signature'),
-
                 ),
-
               ],
-
             ),
 
-            TextButton( //Will go back to main
+            TextButton(
+              //Will go back to main
 
-              onPressed: (){Navigator.pop(context);},
+              onPressed: () {
+                Navigator.pop(context);
+              },
 
               child: const Text('Go Back'),
-
             ),
-
           ],
-
         ),
-
       ),
-
     );
-
   }
-
 }
 
 //body: ,

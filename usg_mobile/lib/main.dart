@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'Pages/AnnouncementsPage.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const RegisterWidget(),
+      home: (FirebaseAuth.instance.currentUser == null) ? const RegisterWidget() : const AnnouncementsPage(),
       //home: const MyHomePage(title: 'Flutter Demo Home Page'),
       debugShowCheckedModeBanner: false, //disables debug tag
       routes: <String, WidgetBuilder>{
